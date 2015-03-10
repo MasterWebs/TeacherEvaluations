@@ -11,7 +11,7 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 	}
 ]);
 
-angular.module("EvalApp").constant("SERVER_URL", "dispatch.ru.is/h22/api/v1/");
+angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
 angular.module('EvalApp').controller('LoginController', 
 ['$scope', '$location', '$rootScope', '$routeParams', 'LoginResource',
@@ -36,15 +36,29 @@ function ($scope, $location, $rootScope, $routeParams, LoginResource) {
 	};
 }]);
 
-angular.module("EvalApp").factory("LoginResource", function () {
+angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
+function ($http, SERVER_URL) {
 	var currentUser;
 	var token;
 
 	return {
-		login: function (user, pass) {  },
+		login: function (user, pass) {
+			var loginObj = {
+				user: user,
+				pass: pass
+			};
+			console.log('loginObj' + loginObj);
+			$http.post(SERVER_URL + 'login', loginObj)
+			.success(function (response) {
+				console.log('login success, data:' + response);
+			})
+			.error(function () {
+				console.log('login unsuccessful');
+			});
+		},
 		logout: function () {  },
 		isLoggedIn: function () {  },
 		currentUser: function () { return currentUser; },
 		getToken: function () { return token; }
 	};
-});
+}]);
