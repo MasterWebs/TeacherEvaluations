@@ -13,6 +13,13 @@ module.exports = function (grunt) {
 				dest: 'dist/app.js'
 			}
 		},
+		uglify: {
+			my_target: {
+				files: {
+					'dist/app.min.js': ['dist/app.js']
+				}
+			}
+		},
 		jshint: {
 			// run jshint on all files in js folder
 			src: [ 'src/*.js' ],
@@ -39,5 +46,5 @@ module.exports = function (grunt) {
 		}
 	};
 	grunt.initConfig(taskConfig);
-	grunt.registerTask('default', ['jshint', 'concat']);
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 };
