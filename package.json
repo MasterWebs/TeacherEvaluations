@@ -1,0 +1,29 @@
+{
+  "name": "TeacherEvaluations",
+  "version": "0.0.1",
+  "description": "Web app for teacher evaluations",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MasterWebs/TeacherEvaluations.git"
+  },
+  "keywords": [
+    "evaluation",
+    "angular"
+  ],
+  "author": "Omar Oskarsson and Snaebjorn Eyjolfsson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MasterWebs/TeacherEvaluations/issues"
+  },
+  "homepage": "https://github.com/MasterWebs/TeacherEvaluations",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "^0.8.0"
+  }
+}
