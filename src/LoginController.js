@@ -1,10 +1,12 @@
-angular.module('Evaluations').controller('LoginController', 
+angular.module('EvalApp').controller('LoginController', 
 ['$scope', '$location', '$rootScope', '$routeParams',
 function ($scope, $location, $rootScope, $routeParams) {
-	$scope.nickname = '';
+	$scope.user = '';
+	$scope.pass = '';
 
 	$scope.login = function () {
 		// TODO:
 		// login user with REST service
-	}
+
+	};
 }]);

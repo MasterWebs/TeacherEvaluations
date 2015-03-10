@@ -4,6 +4,15 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	var taskConfig = {
+		concat: {
+			options: {
+				separator: '\n\n'
+			},
+			dist: {
+				src: ['src/*.js'],
+				dest: 'dist/app.js'
+			}
+		},
 		jshint: {
 			// run jshint on all files in js folder
 			src: [ 'src/*.js' ],
@@ -27,7 +36,8 @@ module.exports = function (grunt) {
 					$: 		 	false
 				} 
 			}
+		}
 	};
 	grunt.initConfig(taskConfig);
-	grunt.registerTask('default', ['jshint']);
+	grunt.registerTask('default', ['jshint', 'concat']);
 };

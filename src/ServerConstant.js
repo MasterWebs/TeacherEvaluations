@@ -1,0 +1,1 @@
+angular.module("EvalApp").constant("SERVER_URL", "dispatch.ru.is/h22/api/v1/");
