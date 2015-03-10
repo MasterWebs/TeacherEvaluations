@@ -8,5 +8,5 @@ angular.module("LoginResource", function () {
 		isLoggedIn: function () {  },
 		currentUser: function () { return currentUser; },
 		getToken: function () { return token; }
-	}
+	};
 });

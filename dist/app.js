@@ -1,5 +1,3 @@
-angular.module("EvalApp").constant("SERVER_URL", "dispatch.ru.is/h22/api/v1/");
-
 angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 	function ($routeProvider) {
 		$routeProvider
@@ -11,6 +9,8 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				redirectTo: '/login'
 			});
 }]);
+
+angular.module("EvalApp").constant("SERVER_URL", "dispatch.ru.is/h22/api/v1/");
 
 angular.module('EvalApp').controller('LoginController', 
 ['$scope', '$location', '$rootScope', '$routeParams',
@@ -24,3 +24,16 @@ function ($scope, $location, $rootScope, $routeParams) {
 
 	};
 }]);
+
+angular.module("LoginResource", function () {
+	var currentUser;
+	var token;
+
+	return {
+		login: function () {  },
+		logout: function () {  },
+		isLoggedIn: function () {  },
+		currentUser: function () { return currentUser; },
+		getToken: function () { return token; }
+	};
+});
