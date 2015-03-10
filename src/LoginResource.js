@@ -1,9 +1,9 @@
-angular.module("LoginResource", function () {
+angular.module("EvalApp").factory("LoginResource", function () {
 	var currentUser;
 	var token;
 
 	return {
-		login: function () {  },
+		login: function (user, pass) {  },
 		logout: function () {  },
 		isLoggedIn: function () {  },
 		currentUser: function () { return currentUser; },

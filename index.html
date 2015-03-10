@@ -1,22 +1,27 @@
 <!DOCTYPE>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">  
-        <link rel="stylesheet/less" type="text/css" href="stylesheet/style.less">  <!--referencse the less file -->
-    	<script src="node_modules/less/dist/less.js"></script> <!-- reference Less js file -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>Teacher Evaluations</title>
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Stylesheets -->
+		<link href="bower_components/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet/less" type="text/css" href="stylesheet/style.less">  <!--referencse the less file -->
+
+		<!-- Scripts -->
+		<script src="node_modules/less/dist/less.js"></script> <!-- reference Less js file -->
 		<script src="bower_components/angular/angular.min.js"></script>
 		<script src="bower_components/angular-route/angular-route.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/toastr/toastr.min.js"></script>
 		<script src="dist/app.js"></script>
 	</head>
-
 	<body ng-app="EvalApp">
 		<div ng-view>
 			Steady....
 		</div>
 	</body>
 </html>
+
