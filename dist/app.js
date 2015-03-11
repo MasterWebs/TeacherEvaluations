@@ -17,7 +17,27 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
+angular.module('EvalApp').controller('HomeController',
+function ($scope, LoginResource, MyResource, $location) {
+	var token = LoginResource.getToken();
+	var courses = [];
 
+	
+	if(token !== undefined) {
+		console.log(token);
+
+		MyResource.courses(token)
+		.success(function (response) {
+			toastr.success("Fetched courses");
+
+		})
+		.error(function () {
+			toastr.error("Something went wrong");
+		});
+	} else {
+		toastr.error("Token undefined");
+	}
+});
 
 angular.module('EvalApp').controller('LoginController',
 function ($scope, LoginResource, $location) {
@@ -72,5 +92,14 @@ function ($http, SERVER_URL) {
 		setUser: function (_user) { user = _user; },
 		setToken: function (_token) { token = _token; },
 		setRole: function (_role) { role = _role; }
+	};
+}]);
+
+angular.module("EvalApp").factory("MyResource", ['$http', 'SERVER_URL',
+function ($http, SERVER_URL) {
+
+	return {
+		courses: function (token) { return $http.get(SERVER_URL + 'my/courses', token); }		
+
 	};
 }]);
