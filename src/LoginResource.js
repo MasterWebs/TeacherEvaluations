@@ -10,23 +10,15 @@ function ($http, SERVER_URL) {
 				user: user,
 				pass: pass
 			};
-			console.log('loginObj: ' + JSON.stringify(loginObj));
-			$http.post(SERVER_URL + 'login', loginObj)
-			.success(function (response) {
-				token = response.Token;
-				user = response.Username;
-				role = response.Role;
-				return 1;  // return success code (1)
-			})
-			.error(function () {
-				console.log('login unsuccessful');
-				return -1; // return error code (-1)
-			});
+			return $http.post(SERVER_URL + 'login', loginObj);
 		},
 		logout: function () {  },
 		isLoggedIn: function () {  },
-		currentUser: function () { return user; },
+		getUser: function () { return user; },
 		getToken: function ()    { return token; },
-		getRole: function ()     { return role; }
+		getRole: function ()     { return role; },
+		setUser: function (_user) { user = _user; },
+		setToken: function (_token) { token = _token; },
+		setRole: function (_role) { role = _role; }
 	};
 }]);

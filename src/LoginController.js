@@ -1,5 +1,5 @@
 angular.module('EvalApp').controller('LoginController',
-function ($scope, LoginResource, toastr) {
+function ($scope, LoginResource) {
 	$scope.user = '';
 	$scope.pass = '';
 
@@ -7,14 +7,16 @@ function ($scope, LoginResource, toastr) {
 		// TODO:
 		// login user with REST service
 		if ($scope.user !== '' && $scope.pass !== '') {
-			var result = LoginResource.login($scope.user, $scope.pass);
-			if (result > 0) {
-				// success
-				toastr.success(LoginResource.user + ' logged in!');
-			} else {
-				// error
-				toastr.error('Could not be logged in!', 'Login error');
-			}
+			LoginResource.login($scope.user, $scope.pass)
+			.success(function (response) {
+				LoginResource.setUser(response.User.Username);
+				LoginResource.setToken(response.Token);
+				LoginResource.setRole(response.User.Role);
+				toastr.success(response.User.Username + ' logged in!');
+			})
+			.error(function () {
+				toastr.error('Bad username or password!', 'Login error');
+			});
 		} else {
 			toastr.error('Username or password empty!', 'Login error');
 		}

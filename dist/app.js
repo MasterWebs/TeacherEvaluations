@@ -14,7 +14,7 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
 angular.module('EvalApp').controller('LoginController',
-function ($scope, LoginResource, toastr) {
+function ($scope, LoginResource) {
 	$scope.user = '';
 	$scope.pass = '';
 
@@ -22,14 +22,16 @@ function ($scope, LoginResource, toastr) {
 		// TODO:
 		// login user with REST service
 		if ($scope.user !== '' && $scope.pass !== '') {
-			var result = LoginResource.login($scope.user, $scope.pass);
-			if (result > 0) {
-				// success
-				toastr.success(LoginResource.user + ' logged in!');
-			} else {
-				// error
-				toastr.error('Could not be logged in!', 'Login error');
-			}
+			LoginResource.login($scope.user, $scope.pass)
+			.success(function (response) {
+				LoginResource.setUser(response.User.Username);
+				LoginResource.setToken(response.Token);
+				LoginResource.setRole(response.User.Role);
+				toastr.success(response.User.Username + ' logged in!');
+			})
+			.error(function () {
+				toastr.error('Bad username or password!', 'Login error');
+			});
 		} else {
 			toastr.error('Username or password empty!', 'Login error');
 		}
@@ -48,23 +50,15 @@ function ($http, SERVER_URL) {
 				user: user,
 				pass: pass
 			};
-			console.log('loginObj: ' + JSON.stringify(loginObj));
-			$http.post(SERVER_URL + 'login', loginObj)
-			.success(function (response) {
-				token = response.Token;
-				user = response.Username;
-				role = response.Role;
-				return 1;  // return success code (1)
-			})
-			.error(function () {
-				console.log('login unsuccessful');
-				return -1; // return error code (-1)
-			});
+			return $http.post(SERVER_URL + 'login', loginObj);
 		},
 		logout: function () {  },
 		isLoggedIn: function () {  },
-		currentUser: function () { return user; },
+		getUser: function () { return user; },
 		getToken: function ()    { return token; },
-		getRole: function ()     { return role; }
+		getRole: function ()     { return role; },
+		setUser: function (_user) { user = _user; },
+		setToken: function (_token) { token = _token; },
+		setRole: function (_role) { role = _role; }
 	};
 }]);
