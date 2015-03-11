@@ -72,11 +72,11 @@ describe('LoginController', function () {
 			expect(toastr.error).toHaveBeenCalled();
 		});
 
-		/*it('should allow login when password and username are non-empty', function () {
+		it('should allow login when password and username are non-empty', function () {
 			$scope.user = 'snaebjorn13';
 			$scope.pass = '123456';
 			$scope.login();
 			expect(mockLoginResource.login).toHaveBeenCalled();
-		});*/
+		});
 	});
 });
