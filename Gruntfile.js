@@ -40,8 +40,7 @@ module.exports = function (grunt) {
 					angular: 	false,
 					moment:  	false,
 					console: 	false,
-					$: 		 	false,
-					toastr:  	false
+					$: 		 	false
 				} 
 			}
 		}

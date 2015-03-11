@@ -13,9 +13,8 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
-angular.module('EvalApp').controller('LoginController', 
-['$scope', '$location', '$rootScope', '$routeParams', 'LoginResource',
-function ($scope, $location, $rootScope, $routeParams, LoginResource) {
+angular.module('EvalApp').controller('LoginController',
+function ($scope, LoginResource, toastr) {
 	$scope.user = '';
 	$scope.pass = '';
 
@@ -23,18 +22,19 @@ function ($scope, $location, $rootScope, $routeParams, LoginResource) {
 		// TODO:
 		// login user with REST service
 		if ($scope.user !== '' && $scope.pass !== '') {
-			LoginResource.login($scope.user, $scope.pass);
-		} else {
-			if ($scope.user === '' && $scope.pass === '') {
-				toastr.error('Username and password cannot be empty!', 'Login error');
-			} else if ($scope.user === '') {
-				toastr.error('Username cannot be empty!', 'Login error');
+			var result = LoginResource.login($scope.user, $scope.pass);
+			if (result > 0) {
+				// success
+				toastr.success(LoginResource.user + ' logged in!');
 			} else {
-				toastr.error('Password cannot be empty!', 'Login error');
+				// error
+				toastr.error('Could not be logged in!', 'Login error');
 			}
+		} else {
+			toastr.error('Username or password empty!', 'Login error');
 		}
 	};
-}]);
+});
 
 angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
@@ -54,9 +54,11 @@ function ($http, SERVER_URL) {
 				token = response.Token;
 				user = response.Username;
 				role = response.Role;
+				return 1;  // return success code (1)
 			})
 			.error(function () {
 				console.log('login unsuccessful');
+				return -1; // return error code (-1)
 			});
 		},
 		logout: function () {  },

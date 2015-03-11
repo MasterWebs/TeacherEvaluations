@@ -16,9 +16,11 @@ function ($http, SERVER_URL) {
 				token = response.Token;
 				user = response.Username;
 				role = response.Role;
+				return 1;  // return success code (1)
 			})
 			.error(function () {
 				console.log('login unsuccessful');
+				return -1; // return error code (-1)
 			});
 		},
 		logout: function () {  },
