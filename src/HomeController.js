@@ -1,7 +1,7 @@
 angular.module('EvalApp').controller('HomeController',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
-	var courses = [];
+	$scope.courses = [];
 
 	
 	if(token !== undefined) {
@@ -9,6 +9,8 @@ function ($scope, LoginResource, MyResource, $location) {
 
 		MyResource.courses(token)
 		.success(function (response) {
+			console.log(response);
+			$scope.courses = response;
 			toastr.success("Fetched courses");
 
 		})

@@ -20,7 +20,7 @@ angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/
 angular.module('EvalApp').controller('HomeController',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
-	var courses = [];
+	$scope.courses = [];
 
 	
 	if(token !== undefined) {
@@ -28,6 +28,8 @@ function ($scope, LoginResource, MyResource, $location) {
 
 		MyResource.courses(token)
 		.success(function (response) {
+			console.log(response);
+			$scope.courses = response;
 			toastr.success("Fetched courses");
 
 		})
@@ -97,9 +99,13 @@ function ($http, SERVER_URL) {
 
 angular.module("EvalApp").factory("MyResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
-
+	var token = '';
+	var config = '';
 	return {
-		courses: function (token) { return $http.get(SERVER_URL + 'my/courses', token); }		
+		courses: function (tok) { 
+			token = 'Basic ' + tok;
+			config = {headers:{'Authorization': token}};
+			return $http.get(SERVER_URL + 'my/courses', config); }		
 
 	};
 }]);
