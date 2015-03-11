@@ -1,5 +1,5 @@
 angular.module('EvalApp').controller('LoginController',
-function ($scope, LoginResource) {
+function ($scope, LoginResource, $location) {
 	$scope.user = '';
 	$scope.pass = '';
 
@@ -13,6 +13,7 @@ function ($scope, LoginResource) {
 				LoginResource.setToken(response.Token);
 				LoginResource.setRole(response.User.Role);
 				toastr.success(response.User.Username + ' logged in!');
+				$location.path('/home/');
 			})
 			.error(function () {
 				toastr.error('Bad username or password!', 'Login error');

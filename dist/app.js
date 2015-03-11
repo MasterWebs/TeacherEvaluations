@@ -5,6 +5,10 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				templateUrl: 'views/login.html',
 				controller: 'LoginController'
 			})
+			.when('/home', {
+				templateUrl: 'views/home.html',
+				controller: 'HomeController'
+			})
 			.otherwise({
 				redirectTo: '/login'
 			});
@@ -13,8 +17,10 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
+
+
 angular.module('EvalApp').controller('LoginController',
-function ($scope, LoginResource) {
+function ($scope, LoginResource, $location) {
 	$scope.user = '';
 	$scope.pass = '';
 
@@ -28,6 +34,7 @@ function ($scope, LoginResource) {
 				LoginResource.setToken(response.Token);
 				LoginResource.setRole(response.User.Role);
 				toastr.success(response.User.Username + ' logged in!');
+				$location.path('/home/');
 			})
 			.error(function () {
 				toastr.error('Bad username or password!', 'Login error');
@@ -40,9 +47,9 @@ function ($scope, LoginResource) {
 
 angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
-	var user;
-	var token;
-	var role;
+	var user = '';
+	var token = '';
+	var role = '';
 
 	return {
 		login: function (user, pass) {
@@ -53,7 +60,12 @@ function ($http, SERVER_URL) {
 			return $http.post(SERVER_URL + 'login', loginObj);
 		},
 		logout: function () {  },
-		isLoggedIn: function () {  },
+		isLoggedIn: function () {
+			if(user !== ''){
+				return true;	
+			} 
+			return false;
+		},
 		getUser: function () { return user; },
 		getToken: function ()    { return token; },
 		getRole: function ()     { return role; },
