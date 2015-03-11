@@ -6,7 +6,7 @@ describe('LoginController', function () {
 
 	var $controller;
 
-	var mockLoginResource = {
+	/* var mockLoginResource = {
 		login: function (user, pass) {
 			return {
 				success: function (fn) {
@@ -26,6 +26,36 @@ describe('LoginController', function () {
 					};
 				}
 			};
+		}
+	}; */
+
+	var mockLoginResource = {
+		user: '',
+		pass: '',
+
+		login: function (user, pass) {
+			this.user = user;
+			this.pass = pass;
+			console.log(this.user + ' ' + this.pass);
+			return this;
+		},
+
+		success: function (fn) {
+			if (this.user === 'snaebjorn13' && this.pass === '123456') {
+				var response = {
+					Token: 'ajfsjsafjab',
+					User: 'snaebjorn13'
+				};
+				fn(response);
+				return this;
+			}
+		},
+
+		error: function (errorFn) {
+			if (this.user !== 'snaebjorn13' && this.pass !== '123456') {
+				errorFn();
+				return this;
+			}
 		}
 	};
 
