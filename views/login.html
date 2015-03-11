@@ -1,12 +1,10 @@
-<div>
-	<h3>Hello mein freund</h3>
-	<div>
+<div id="logForm">
+	<h3>Please login</h3>
+	<div class="form-group">
 		<form ng-submit="login()">
-			<label for="user">Username</label>
-			<input type="text" id="user" ng-model="user" />
-			<label for="pass">Password</label>
-			<input type="text" id="pass" ng-model="pass" />
-			<input type="submit" value="Log in"> </input>
+			<input type="text" id="user" class="form-control" ng-model="user" placeholder="Username" />
+			<input type="password" id="pass" class="form-control" ng-model="pass" placeholder="Password" />
+			<input type="submit" value="Log in" class="btn btn-default"> </input>
 		</form>
 	</div>
 </div>
