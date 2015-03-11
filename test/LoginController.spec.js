@@ -11,7 +11,11 @@ describe('LoginController', function () {
 			return {
 				success: function (fn) {
 					if (user === 'snaebjorn13' && pass === '123456') {
-						fn();
+						var response = {
+							Token: 'ajfsjsafjab',
+							User: 'snaebjorn13'
+						};
+						fn(response);
 					}
 					return {
 						error: function (errorFn) {
@@ -19,11 +23,11 @@ describe('LoginController', function () {
 								errorFn();
 							}
 						}
-					}
+					};
 				}
-			}
+			};
 		}
-	}
+	};
 
 	beforeEach(inject(function (_$controller_) {
 		$controller = _$controller_;

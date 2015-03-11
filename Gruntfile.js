@@ -21,8 +21,8 @@ module.exports = function (grunt) {
 			}
 		},
 		jshint: {
-			// run jshint on all files in js folder
-			src: [ 'src/*.js' ],
+			// run jshint on all files in src and test
+			src: [ 'src/*.js', 'test/*.js'],
 			gruntfile: ['Gruntfile.js'],
 			options: {
 				curly: 	true,
@@ -41,7 +41,14 @@ module.exports = function (grunt) {
 					moment:  	false,
 					console: 	false,
 					$: 		 	false,
-					toastr:   	false
+					toastr:   	false,
+					// globals for unit testing
+					beforeEach: false,
+					spyOn: 		false,
+					it:  		false,
+					expect: 	false,
+					describe: 	false,
+					inject: 	false
 				} 
 			}
 		}
