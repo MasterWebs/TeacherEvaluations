@@ -38,8 +38,9 @@ function ($scope, $location, $rootScope, $routeParams, LoginResource) {
 
 angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
-	var currentUser;
+	var user;
 	var token;
+	var role;
 
 	return {
 		login: function (user, pass) {
@@ -47,10 +48,12 @@ function ($http, SERVER_URL) {
 				user: user,
 				pass: pass
 			};
-			console.log('loginObj' + loginObj);
+			console.log('loginObj: ' + JSON.stringify(loginObj));
 			$http.post(SERVER_URL + 'login', loginObj)
 			.success(function (response) {
-				console.log('login success, data:' + response);
+				token = response.Token;
+				user = response.Username;
+				role = response.Role;
 			})
 			.error(function () {
 				console.log('login unsuccessful');
@@ -58,7 +61,8 @@ function ($http, SERVER_URL) {
 		},
 		logout: function () {  },
 		isLoggedIn: function () {  },
-		currentUser: function () { return currentUser; },
-		getToken: function () { return token; }
+		currentUser: function () { return user; },
+		getToken: function ()    { return token; },
+		getRole: function ()     { return role; }
 	};
 }]);
