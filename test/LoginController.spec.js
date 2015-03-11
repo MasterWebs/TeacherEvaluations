@@ -8,16 +8,20 @@ describe('LoginController', function () {
 
 	var mockLoginResource = {
 		login: function (user, pass) {
-			
-		}
-	}
-
-	var mockToastr = {
-		error: function () {
-
-		},
-		success: function () {
-
+			return {
+				success: function (fn) {
+					if (user === 'snaebjorn13' && pass === '123456') {
+						fn();
+					}
+					return {
+						error: function (errorFn) {
+							if (user !== 'snaebjorn13' && pass === '123456') {
+								errorFn();
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -33,6 +37,7 @@ describe('LoginController', function () {
 
 			spyOn(mockLoginResource, 'login');
 			spyOn(toastr, 'error');
+			spyOn(toastr, 'success');
 
 			controller = $controller('LoginController', 
 				{ $scope:        $scope,
@@ -63,11 +68,11 @@ describe('LoginController', function () {
 			expect(toastr.error).toHaveBeenCalled();
 		});
 
-		/* it('should allow login when password and username are non-empty', function () {
+		it('should allow login when password and username are non-empty', function () {
 			$scope.user = 'snaebjorn13';
 			$scope.pass = '123456';
 			$scope.login();
 			expect(mockLoginResource.login).toHaveBeenCalled();
-		}); */
+		});
 	});
 });
