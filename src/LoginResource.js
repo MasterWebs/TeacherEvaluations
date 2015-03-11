@@ -1,8 +1,8 @@
 angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
-	var user;
-	var token;
-	var role;
+	var user = '';
+	var token = '';
+	var role = '';
 
 	return {
 		login: function (user, pass) {
@@ -13,7 +13,12 @@ function ($http, SERVER_URL) {
 			return $http.post(SERVER_URL + 'login', loginObj);
 		},
 		logout: function () {  },
-		isLoggedIn: function () {  },
+		isLoggedIn: function () {
+			if(user !== ''){
+				return true;	
+			} 
+			return false;
+		},
 		getUser: function () { return user; },
 		getToken: function ()    { return token; },
 		getRole: function ()     { return role; },
