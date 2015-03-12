@@ -12,7 +12,6 @@ function ($scope, LoginResource, MyResource, $location) {
 		MyResource.courses()
 		.success(function (response) {
 			$scope.myCourses = response;
-			console.log("Courses: " + $scope.myCourses);
 			toastr.success("Fetched courses");
 
 		})

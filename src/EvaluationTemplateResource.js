@@ -10,8 +10,8 @@ function ($http, SERVER_URL) {
 		getTemplate: function (id) {
 
 		},
-		createTemplate: function (template) {
-
+		create: function (template) {
+			return $http.post(SERVER_URL + 'evaluationtemplates', template);
 		}
 
 	};

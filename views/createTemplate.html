@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-6">
+		<h3>Create Template</h3>
+		<div class="form-group"> 
+			<form ng-submit="createTemplate()">
+				<input type="text" class="form-control" ng-model="title" placeholder="Titill á íslensku" />
+				<input type="text" class="form-control" ng-model="titleEN" placeholder="Title in english" />
+				<textarea  class="form-control" ng-model="intro" placeholder="Kynning á íslensku"> </textarea>
+				<textarea  class="form-control" ng-model="introEN" placeholder="Intro in english"> </textarea>
+				<input type="submit" value="create"  class="btn btn-default" />
+			</form>
+		</div> <!-- form-group -->
+	</div> <!-- col-md-6 -->
+
+	<div class="col-md-6">
+		<h3>Questions</h3>
+
+		<div class="form-group">
+			<form>
+				<input type="text" class="form-control" ng-model="qText" placeholder="Question" />
+				<input type="text" class="form-control" ng-model="qTextEN" placeholder="Question in english" />
+				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image" />
+				<select class="form-control" ng-model="qType">
+					<option>Single</option>
+					<option>Multiple</option>
+				</select>		
+			</form>
+
+		</div>
+		<button ng-click="createQuestion()">Add</button>
+		<button question-template class="btn btn-sm glyphicon glyphicon-plus" ng-click="addQuestion()"></button> <span>Add Question</span>
+	</div>
+</div> <!-- row -->
