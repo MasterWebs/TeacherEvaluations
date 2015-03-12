@@ -50,26 +50,27 @@ describe('CreateTemplateController', function () {
 	};
 
 	var mockEvaluationTemplateResource = {
-		create: function (templateObj) {
+		create: function (tObj) {
 			return {
 				success: function (fn) {
 					// call fn() if success
-					if (ID !== null &&
-						Title !== '' &&
-						TitleEn !== '' &&
-						IntroText !== '' &&
-						IntroTextEN !== '' &&
-						(CourseQuestions.length !== 0 ||
-						 TeacherQuestions.length !== 0))
-				}
-				return {
-					error: function (errorFn) {
-						// call errorFn() if error
+					if (tObj.tID !== null && tObj.Title !== '' && tObj.TitleEn !== '' && tObj.IntroText !== '' && 
+						tObj.IntroTextEN !== '' && tObj.TeacherQuestions.length !== 0) {
+						fn();
 					}
-				};
+					return {
+						error: function (errorFn) {
+							// call errorFn() if error
+							if (tObj.tID !== null || tObj.Title || '' && tObj.TitleEn !== '' || tObj.IntroText !== '' || 
+								tObj.IntroTextEN !== '' || tObj.TeacherQuestions.length !== 0) {
+								errorFn();
+							}
+						}
+					};
+				}	
 			};
 		}
-	};
+	};	
 
 	beforeEach(inject(function (_$controller_) {
 		$controller = _$controller_;
@@ -94,7 +95,5 @@ describe('CreateTemplateController', function () {
 			//expect(mockEvaluationTemplateResource.create).not.toHaveBeenCalled();
 			expect(toastr.error).toHaveBeenCalled();
 		});
-
 	});
-
 });
