@@ -1,4 +1,5 @@
 angular.module('EvalApp').controller('HomeController',
+['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
 	$scope.courses = [];
@@ -20,4 +21,4 @@ function ($scope, LoginResource, MyResource, $location) {
 	} else {
 		toastr.error("Token undefined");
 	}
-});
+}]);

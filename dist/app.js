@@ -17,7 +17,22 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
+angular.module('EvalApp').directive('evaluationQuestion',
+function () {
+	return {
+		restrict: 'E',
+		scope: {
+			question: 'ngModel'
+		},
+		templateUrl: 'views/evaluationQuestion.tpl.html',
+		link: function (scope, element, attributes) {
+
+		}
+	};
+});
+
 angular.module('EvalApp').controller('HomeController',
+['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
 	$scope.courses = [];
@@ -39,9 +54,10 @@ function ($scope, LoginResource, MyResource, $location) {
 	} else {
 		toastr.error("Token undefined");
 	}
-});
+}]);
 
 angular.module('EvalApp').controller('LoginController',
+['$scope', 'LoginResource', '$location',
 function ($scope, LoginResource, $location) {
 	$scope.user = '';
 	$scope.pass = '';
@@ -65,7 +81,7 @@ function ($scope, LoginResource, $location) {
 			toastr.error('Username or password empty!', 'Login error');
 		}
 	};
-});
+}]);
 
 angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {

@@ -6,7 +6,7 @@ describe('LoginController', function () {
 
 	var $controller;
 
-	/* var mockLoginResource = {
+	var mockLoginResource = {
 		login: function (user, pass) {
 			return {
 				success: function (fn) {
@@ -26,10 +26,14 @@ describe('LoginController', function () {
 					};
 				}
 			};
-		}
-	}; */
+		},
 
-	var mockLoginResource = {
+		setUser: function (user) { },
+		setRole: function (pass) { },
+		setToken: function (token) { }
+	};
+
+	/* var mockLoginResource = {
 		user: '',
 		pass: '',
 
@@ -57,6 +61,10 @@ describe('LoginController', function () {
 				return this;
 			}
 		}
+	}; */
+
+	var mockLocation = {
+		path: function(){}
 	};
 
 	beforeEach(inject(function (_$controller_) {
@@ -69,13 +77,18 @@ describe('LoginController', function () {
 		beforeEach(function() {
 			$scope = {};
 
-			spyOn(mockLoginResource, 'login');
+			spyOn(mockLoginResource, 'login').and.callThrough();
+			spyOn(mockLoginResource, 'setUser');
+			spyOn(mockLoginResource, 'setToken');
+			spyOn(mockLoginResource, 'setRole');
+			spyOn(mockLocation, 'path');
 			spyOn(toastr, 'error');
 			spyOn(toastr, 'success');
 
 			controller = $controller('LoginController', 
 				{ $scope:        $scope,
-				  LoginResource: mockLoginResource });
+				  LoginResource: mockLoginResource,
+				  $location:     mockLocation  });
 		});
 
 		it('should reject login when username is empty', function () {
@@ -107,6 +120,11 @@ describe('LoginController', function () {
 			$scope.pass = '123456';
 			$scope.login();
 			expect(mockLoginResource.login).toHaveBeenCalled();
+			expect(mockLoginResource.setUser).toHaveBeenCalled();
+			expect(mockLoginResource.setToken).toHaveBeenCalled();
+			expect(mockLoginResource.setRole).toHaveBeenCalled();
+			expect(toastr.success).toHaveBeenCalled();
+			expect(mockLocation.path).toHaveBeenCalled();
 		});
 	});
 });

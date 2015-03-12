@@ -1,4 +1,5 @@
 angular.module('EvalApp').controller('LoginController',
+['$scope', 'LoginResource', '$location',
 function ($scope, LoginResource, $location) {
 	$scope.user = '';
 	$scope.pass = '';
@@ -22,4 +23,4 @@ function ($scope, LoginResource, $location) {
 			toastr.error('Username or password empty!', 'Login error');
 		}
 	};
-});
+}]);
