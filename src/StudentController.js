@@ -2,6 +2,7 @@ angular.module('EvalApp').controller('StudentController',
 ['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
+	$scope.currentUser = LoginResource.getUser();
 	$scope.myCourses = [];
 	$scope.myEvaluations = [];
 	
