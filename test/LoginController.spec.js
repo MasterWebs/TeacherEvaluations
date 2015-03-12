@@ -10,10 +10,23 @@ describe('LoginController', function () {
 		login: function (user, pass) {
 			return {
 				success: function (fn) {
+					var response = {};
 					if (user === 'snaebjorn13' && pass === '123456') {
-						var response = {
+						response = {
 							Token: 'ajfsjsafjab',
-							User: 'snaebjorn13'
+							User: {
+								Username: 'snaebjorn13',
+								Role: 'student'
+							}
+						};
+						fn(response);
+					} else if (user === 'admin' && pass === '123456') {
+						response = {
+							Token: 'jafjsaja',
+							User: {
+								Username: 'admin',
+								Role: 'admin'
+							}
 						};
 						fn(response);
 					}
@@ -33,38 +46,8 @@ describe('LoginController', function () {
 		setToken: function (token) { }
 	};
 
-	/* var mockLoginResource = {
-		user: '',
-		pass: '',
-
-		login: function (user, pass) {
-			this.user = user;
-			this.pass = pass;
-			console.log(this.user + ' ' + this.pass);
-			return this;
-		},
-
-		success: function (fn) {
-			if (this.user === 'snaebjorn13' && this.pass === '123456') {
-				var response = {
-					Token: 'ajfsjsafjab',
-					User: 'snaebjorn13'
-				};
-				fn(response);
-				return this;
-			}
-		},
-
-		error: function (errorFn) {
-			if (this.user !== 'snaebjorn13' && this.pass !== '123456') {
-				errorFn();
-				return this;
-			}
-		}
-	}; */
-
 	var mockLocation = {
-		path: function(){}
+		path: function (location) { }
 	};
 
 	beforeEach(inject(function (_$controller_) {
@@ -115,16 +98,28 @@ describe('LoginController', function () {
 			expect(toastr.error).toHaveBeenCalled();
 		});
 
-		it('should allow login when password and username are non-empty', function () {
+		it('it should redirect student to student front page, when he logs in', function () {
 			$scope.user = 'snaebjorn13';
 			$scope.pass = '123456';
 			$scope.login();
-			expect(mockLoginResource.login).toHaveBeenCalled();
-			expect(mockLoginResource.setUser).toHaveBeenCalled();
+			expect(mockLoginResource.login).toHaveBeenCalledWith('snaebjorn13', '123456');
+			expect(mockLoginResource.setUser).toHaveBeenCalledWith('snaebjorn13');
 			expect(mockLoginResource.setToken).toHaveBeenCalled();
-			expect(mockLoginResource.setRole).toHaveBeenCalled();
+			expect(mockLoginResource.setRole).toHaveBeenCalledWith('student');
 			expect(toastr.success).toHaveBeenCalled();
-			expect(mockLocation.path).toHaveBeenCalled();
+			expect(mockLocation.path).toHaveBeenCalledWith('/student');
+		});
+
+		it('should redirect admin to admin front page, when he logs in', function () {
+			$scope.user = 'admin';
+			$scope.pass = '123456';
+			$scope.login();
+			expect(mockLoginResource.login).toHaveBeenCalledWith('admin', '123456');
+			expect(mockLoginResource.setUser).toHaveBeenCalledWith('admin');
+			expect(mockLoginResource.setToken).toHaveBeenCalled();
+			expect(mockLoginResource.setRole).toHaveBeenCalledWith('admin');
+			expect(toastr.success).toHaveBeenCalled();
+			expect(mockLocation.path).toHaveBeenCalledWith('/admin');
 		});
 	});
 });

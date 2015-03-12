@@ -5,9 +5,13 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				templateUrl: 'views/login.html',
 				controller: 'LoginController'
 			})
-			.when('/home', {
-				templateUrl: 'views/home.html',
-				controller: 'HomeController'
+			.when('/student', {
+				templateUrl: 'views/student-frontpage.html',
+				controller: 'StudentController'
+			})
+			.when('/admin', {
+				templateUrl: 'views/admin-frontpage.html',
+				controller: 'AdminController'
 			})
 			.otherwise({
 				redirectTo: '/login'

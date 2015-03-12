@@ -19,6 +19,7 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/toastr/toastr.min.js',
+      'src/EvalApp.js',
       'src/*.js',
       'test/*.spec.js'
     ],

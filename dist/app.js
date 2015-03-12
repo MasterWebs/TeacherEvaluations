@@ -5,9 +5,13 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				templateUrl: 'views/login.html',
 				controller: 'LoginController'
 			})
-			.when('/home', {
-				templateUrl: 'views/home.html',
-				controller: 'HomeController'
+			.when('/student', {
+				templateUrl: 'views/student-frontpage.html',
+				controller: 'StudentController'
+			})
+			.when('/admin', {
+				templateUrl: 'views/admin-frontpage.html',
+				controller: 'AdminController'
 			})
 			.otherwise({
 				redirectTo: '/login'
@@ -16,6 +20,12 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 ]);
 
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
+
+angular.module('EvalApp').controller('AdminController', 
+['$scope', 'LoginResource', 'MyResource', '$location',
+function ($scope, LoginResource, MyResource, $location) {
+	var token = LoginResource.getToken();
+}]);
 
 angular.module('EvalApp').directive('evaluationQuestion',
 function () {
@@ -31,31 +41,6 @@ function () {
 	};
 });
 
-angular.module('EvalApp').controller('HomeController',
-['$scope', 'LoginResource', 'MyResource', '$location',
-function ($scope, LoginResource, MyResource, $location) {
-	var token = LoginResource.getToken();
-	$scope.courses = [];
-
-	
-	if(token !== undefined) {
-		console.log(token);
-
-		MyResource.courses(token)
-		.success(function (response) {
-			console.log(response);
-			$scope.courses = response;
-			toastr.success("Fetched courses");
-
-		})
-		.error(function () {
-			toastr.error("Something went wrong");
-		});
-	} else {
-		toastr.error("Token undefined");
-	}
-}]);
-
 angular.module('EvalApp').controller('LoginController',
 ['$scope', 'LoginResource', '$location',
 function ($scope, LoginResource, $location) {
@@ -68,11 +53,15 @@ function ($scope, LoginResource, $location) {
 		if ($scope.user !== '' && $scope.pass !== '') {
 			LoginResource.login($scope.user, $scope.pass)
 			.success(function (response) {
+				console.log(JSON.stringify(response));
+				console.log(response.User.Username);
 				LoginResource.setUser(response.User.Username);
 				LoginResource.setToken(response.Token);
 				LoginResource.setRole(response.User.Role);
 				toastr.success(response.User.Username + ' logged in!');
-				$location.path('/home/');
+				if (response.User.Role === 'student') {
+
+				}
 			})
 			.error(function () {
 				toastr.error('Bad username or password!', 'Login error');
@@ -124,4 +113,29 @@ function ($http, SERVER_URL) {
 			return $http.get(SERVER_URL + 'my/courses', config); }		
 
 	};
+}]);
+
+angular.module('EvalApp').controller('StudentController',
+['$scope', 'LoginResource', 'MyResource', '$location',
+function ($scope, LoginResource, MyResource, $location) {
+	var token = LoginResource.getToken();
+	$scope.courses = [];
+
+	
+	if(token !== undefined) {
+		console.log(token);
+
+		MyResource.courses(token)
+		.success(function (response) {
+			console.log(response);
+			$scope.courses = response;
+			toastr.success("Fetched courses");
+
+		})
+		.error(function () {
+			toastr.error("Something went wrong");
+		});
+	} else {
+		toastr.error("Token undefined");
+	}
 }]);

@@ -10,11 +10,16 @@ function ($scope, LoginResource, $location) {
 		if ($scope.user !== '' && $scope.pass !== '') {
 			LoginResource.login($scope.user, $scope.pass)
 			.success(function (response) {
+				// console.log(JSON.stringify(response));
 				LoginResource.setUser(response.User.Username);
 				LoginResource.setToken(response.Token);
 				LoginResource.setRole(response.User.Role);
 				toastr.success(response.User.Username + ' logged in!');
-				$location.path('/home/');
+				if (response.User.Role === 'student') {
+					$location.path('/student');
+				} else if (response.User.Role === 'admin') {
+					$location.path('/admin');
+				}
 			})
 			.error(function () {
 				toastr.error('Bad username or password!', 'Login error');
