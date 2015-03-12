@@ -2,11 +2,14 @@ angular.module("EvalApp").factory("MyResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
 	var token = '';
 	var config = '';
+	
 	return {
-		courses: function (tok) { 
-			token = 'Basic ' + tok;
+		init: function (_token) {
+			token = 'Basic ' + _token;
 			config = {headers:{'Authorization': token}};
-			return $http.get(SERVER_URL + 'my/courses', config); }		
+		},
+		courses: function () { return $http.get(SERVER_URL + 'my/courses', config); },
+		evaluations: function () { return $http.get(SERVER_URL + 'my/evaluations', config); }		
 
 	};
 }]);

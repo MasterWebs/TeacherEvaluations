@@ -6,11 +6,11 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				controller: 'LoginController'
 			})
 			.when('/student', {
-				templateUrl: 'views/student-frontpage.html',
+				templateUrl: 'views/studentFrontpage.html',
 				controller: 'StudentController'
 			})
 			.when('/admin', {
-				templateUrl: 'views/admin-frontpage.html',
+				templateUrl: 'views/adminFrontpage.html',
 				controller: 'AdminController'
 			})
 			.otherwise({
