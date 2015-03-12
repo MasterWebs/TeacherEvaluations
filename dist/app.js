@@ -6,11 +6,11 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				controller: 'LoginController'
 			})
 			.when('/student', {
-				templateUrl: 'views/student-frontpage.html',
+				templateUrl: 'views/studentFrontpage.html',
 				controller: 'StudentController'
 			})
 			.when('/admin', {
-				templateUrl: 'views/admin-frontpage.html',
+				templateUrl: 'views/adminFrontpage.html',
 				controller: 'AdminController'
 			})
 			.otherwise({
@@ -53,14 +53,15 @@ function ($scope, LoginResource, $location) {
 		if ($scope.user !== '' && $scope.pass !== '') {
 			LoginResource.login($scope.user, $scope.pass)
 			.success(function (response) {
-				console.log(JSON.stringify(response));
-				console.log(response.User.Username);
+				// console.log(JSON.stringify(response));
 				LoginResource.setUser(response.User.Username);
 				LoginResource.setToken(response.Token);
 				LoginResource.setRole(response.User.Role);
 				toastr.success(response.User.Username + ' logged in!');
 				if (response.User.Role === 'student') {
-
+					$location.path('/student');
+				} else if (response.User.Role === 'admin') {
+					$location.path('/admin');
 				}
 			})
 			.error(function () {
@@ -106,11 +107,14 @@ angular.module("EvalApp").factory("MyResource", ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
 	var token = '';
 	var config = '';
+	
 	return {
-		courses: function (tok) { 
-			token = 'Basic ' + tok;
+		init: function (_token) {
+			token = 'Basic ' + _token;
 			config = {headers:{'Authorization': token}};
-			return $http.get(SERVER_URL + 'my/courses', config); }		
+		},
+		courses: function () { return $http.get(SERVER_URL + 'my/courses', config); },
+		evaluations: function () { return $http.get(SERVER_URL + 'my/evaluations', config); }		
 
 	};
 }]);
@@ -119,21 +123,31 @@ angular.module('EvalApp').controller('StudentController',
 ['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
-	$scope.courses = [];
-
+	$scope.myCourses = [];
+	$scope.myEvaluations = [];
 	
 	if(token !== undefined) {
-		console.log(token);
-
-		MyResource.courses(token)
+		MyResource.init(token);  //Initialize token and config in MyResource
+		
+		MyResource.courses()
 		.success(function (response) {
-			console.log(response);
-			$scope.courses = response;
+			$scope.myCourses = response;
+			console.log("Courses: " + $scope.myCourses);
 			toastr.success("Fetched courses");
 
 		})
 		.error(function () {
 			toastr.error("Something went wrong");
+		});
+
+		MyResource.evaluations()
+		.success (function (response) {
+			$scope.myEvaluations = response;
+			console.log("Eval: " + $scope.myEvaluations);
+			toastr.success("Fetched evaluations");
+		})
+		.error (function () {
+			toastr.error("Could not fetch your evaluations");
 		});
 	} else {
 		toastr.error("Token undefined");
