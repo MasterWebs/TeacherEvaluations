@@ -13,10 +13,6 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				templateUrl: 'views/adminFrontpage.html',
 				controller: 'AdminController'
 			})
-			.when('/admin/create-evaluation', {
-				templateUrl: 'views/evaluationQuestions.tpl.html'
-				controller: 
-			})
 			.otherwise({
 				redirectTo: '/login'
 			});

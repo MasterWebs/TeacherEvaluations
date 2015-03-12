@@ -27,6 +27,12 @@ function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
 }]);
 
+angular.module('EvalApp').controller('EvaluationController',
+['$scope', 'LoginResource',
+function ($scope, LoginResource) {
+	
+}]);
+
 angular.module('EvalApp').directive('evaluationQuestion',
 function () {
 	return {
@@ -40,6 +46,29 @@ function () {
 		}
 	};
 });
+
+
+
+
+
+angular.module('EvalApp').factory('EvaluationTemplateResource', 
+['$http', 'SERVER_URL',
+function ($http, SERVER_URL) {
+
+
+	return {
+		getTemplates: function () {
+			
+		},
+		getTemplate: function (id) {
+
+		},
+		createTemplate: function (template) {
+
+		}
+
+	};
+}]);
 
 angular.module('EvalApp').controller('LoginController',
 ['$scope', 'LoginResource', '$location',
@@ -124,6 +153,7 @@ angular.module('EvalApp').controller('StudentController',
 ['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
 	var token = LoginResource.getToken();
+	$scope.currentUser = LoginResource.getUser();
 	$scope.myCourses = [];
 	$scope.myEvaluations = [];
 	
