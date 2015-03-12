@@ -57,7 +57,7 @@ describe('LoginController', function () {
 	describe('$scope.login', function () {
 		var $scope, controller;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			$scope = {};
 
 			spyOn(mockLoginResource, 'login').and.callThrough();

@@ -44,6 +44,7 @@ module.exports = function (grunt) {
 					toastr:   	false,
 					// globals for unit testing
 					beforeEach: false,
+					afterEach: 	false,
 					spyOn: 		false,
 					it:  		false,
 					expect: 	false,
