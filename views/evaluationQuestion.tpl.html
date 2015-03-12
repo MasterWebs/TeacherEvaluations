@@ -1,0 +1,27 @@
+<div></div>
+
+<div>
+	{{question.Text}}
+</div>
+
+<div ng-show="question.Type === 'text'">
+	<!-- Question answered by text -->
+	<form ng-submit="submit(question)">
+		<textarea ng-model="question.answer"></textarea>
+		<input type="submit" />
+	</form>
+</div>
+
+<div ng-show="question.Type === 'single'">
+	<!-- Question answered by single choice -->
+	<form ng-submit="submit(question)">
+		<div ng-repeat="answer in question.Answers">
+			<input type="radio" value="answer.Text" />Answer.Text
+		</input>
+		<input type="submit" />
+	</form>
+</div>
+
+<div ng-show="question.Type === 'multiple'">
+	<!-- TODO: Question answered by multiple choice -->
+</div>
