@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 				separator: '\n\n'
 			},
 			dist: {
-				src: ['src/*.js'],
+				src: ['src/EvalApp.js', 'src/*.js'],
 				dest: 'dist/app.js'
 			}
 		},
