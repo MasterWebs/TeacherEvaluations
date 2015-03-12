@@ -87,7 +87,7 @@ function ($http, SERVER_URL) {
 			};
 			return $http.post(SERVER_URL + 'login', loginObj);
 		},
-		logout: function () {  },
+		// logout: function () {  },
 		isLoggedIn: function () {
 			if(user !== ''){
 				return true;	

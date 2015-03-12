@@ -14,20 +14,20 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">./src/LoginResource.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">6.25% <small>(1 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">0% <small>(0 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">6.25% <small>(1 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -65,66 +65,66 @@
 28
 29</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module("EvalApp").factory("LoginResource", ['$http', 'SERVER_URL',
-<span class="fstat-no" title="function not covered" >function ($http, SERVER_URL) {</span>
-<span class="cstat-no" title="statement not covered" >	var user = '';</span>
-<span class="cstat-no" title="statement not covered" >	var token = '';</span>
-<span class="cstat-no" title="statement not covered" >	var role = '';</span>
+function ($http, SERVER_URL) {
+	var user = '';
+	var token = '';
+	var role = '';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	return {</span>
-		login: <span class="fstat-no" title="function not covered" >function (user, pass) {</span>
-<span class="cstat-no" title="statement not covered" >			var loginObj = {</span>
+	return {
+		login: function (user, pass) {
+			var loginObj = {
 				user: user,
 				pass: pass
 			};
-<span class="cstat-no" title="statement not covered" >			return $http.post(SERVER_URL + 'login', loginObj);</span>
+			return $http.post(SERVER_URL + 'login', loginObj);
 		},
-		logout: <span class="fstat-no" title="function not covered" >function () {</span>  },
-		isLoggedIn: <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >			if(user !== ''){</span>
-<span class="cstat-no" title="statement not covered" >				return true;	</span>
+		// logout: function () {  },
+		isLoggedIn: function () {
+			if(user !== ''){
+				return true;	
 			} 
-<span class="cstat-no" title="statement not covered" >			return false;</span>
+			return false;
 		},
-		getUser: <span class="fstat-no" title="function not covered" >function () {</span> <span class="cstat-no" title="statement not covered" >return user; </span>},
-		getToken: <span class="fstat-no" title="function not covered" >function ()    {</span> <span class="cstat-no" title="statement not covered" >return token; </span>},
-		getRole: <span class="fstat-no" title="function not covered" >function ()     {</span> <span class="cstat-no" title="statement not covered" >return role; </span>},
-		setUser: <span class="fstat-no" title="function not covered" >function (_user) {</span> <span class="cstat-no" title="statement not covered" >user = _user; </span>},
-		setToken: <span class="fstat-no" title="function not covered" >function (_token) {</span> <span class="cstat-no" title="statement not covered" >token = _token; </span>},
-		setRole: <span class="fstat-no" title="function not covered" >function (_role) {</span> <span class="cstat-no" title="statement not covered" >role = _role; </span>}
+		getUser: function () { return user; },
+		getToken: function ()    { return token; },
+		getRole: function ()     { return role; },
+		setUser: function (_user) { user = _user; },
+		setToken: function (_token) { token = _token; },
+		setRole: function (_role) { role = _role; }
 	};
 }]);</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 12 2015 13:32:17 GMT+0000 (Greenwich Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 12 2015 15:51:44 GMT+0000 (Greenwich Standard Time)</div>
 </div>
 
 <script src="../prettify.js"></script>
