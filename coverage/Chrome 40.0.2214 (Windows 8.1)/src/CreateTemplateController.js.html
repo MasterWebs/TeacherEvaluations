@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ./src/CreateTemplateController.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">./src/CreateTemplateController.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">42.86% <small>(18 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">6.25% <small>(1 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">40% <small>(2 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">42.86% <small>(18 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">./src/</a> &#187; CreateTemplateController.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('EvalApp').controller('CreateTemplateController', 
+['$scope', '$location', 'LoginResource', 'EvaluationTemplateResource',
+function ($scope, $location, LoginResource, EvaluationTemplateResource) {
+	$scope.title = '';
+	$scope.titleEN = '';
+	$scope.intro = '';
+	$scope.introEN = '';
+	$scope.courseQuestions = [];
+	$scope.teacherQuestions = [];
+	$scope.qText = '';
+	$scope.qTextEN = '';
+	$scope.qImageURL = '';
+	$scope.qType = '';
+	$scope.q = true; //boolean to decide if it is a course or a teacher question
+	$scope.tID = 0;
+	$scope.qID = 0;
+&nbsp;
+	$scope.createTemplate = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >		if ($scope.title === '') { </span>
+<span class="cstat-no" title="statement not covered" >			toastr.error("Title cannot be empty"); </span>
+		} else <span class="cstat-no" title="statement not covered" >if ($scope.titleEN === '') {</span>
+<span class="cstat-no" title="statement not covered" >		 toastr.error("Title in english cannot be empty"); </span>
+		} else <span class="cstat-no" title="statement not covered" >if ($scope.intro === '') {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error("Intro cannot be empty");</span>
+		} else <span class="cstat-no" title="statement not covered" >if ($scope.introEN === '') {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error("Intro in english cannot be empty");</span>
+		} else <span class="cstat-no" title="statement not covered" >if ($scope.teacherQuestions.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error("Teacher questions are empty");</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			var templateObj = {</span>
+				ID: $scope.tID,
+				Title: $scope.title,
+				TitleEN: $scope.titleEN,
+				IntroText: $scope.intro,
+				IntroTextEN: $scope.introEN,
+				CourseQuestions: $scope.courseQuestions,
+				TeacherQuestions: $scope.teacherQuestions
+			};
+<span class="cstat-no" title="statement not covered" >			console.log(templateObj);</span>
+<span class="cstat-no" title="statement not covered" >			EvaluationTemplateResource.create(templateObj)</span>
+			.success (<span class="fstat-no" title="function not covered" >function (response) {</span>
+<span class="cstat-no" title="statement not covered" >				$scope.tID++;</span>
+<span class="cstat-no" title="statement not covered" >				toastr.success("Created evaluation template");</span>
+			})
+			.error (<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >				toastr.error("Could not create template");</span>
+			});
+		}
+	};
+&nbsp;
+	$scope.createQuestion = function () {
+		<span class="missing-if-branch" title="else path not taken" >E</span>if ($scope.qText === '') {
+			toastr.error("Question text cannot be empty");
+		} else <span class="cstat-no" title="statement not covered" >if ($scope.qTextEN === '') {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error("Questin text in english cannot be empty");</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			var qObj = {</span>
+				ID: $scope.qID,
+				Text: $scope.qText,
+				TextEN: $scope.qTextEN,
+				ImageURL: $scope.qImageURL,
+				Type: 'Single', //text, single, multiple
+				Answers: {
+					ID: 0,
+					Text: '',
+					TextEN: '',
+          			ImageURL: '',
+          			Weight: 0
+				}
+&nbsp;
+			};
+<span class="cstat-no" title="statement not covered" >			$scope.qID++;</span>
+<span class="cstat-no" title="statement not covered" >			if($scope.q === true) {</span>
+<span class="cstat-no" title="statement not covered" >				$scope.courseQuestions.push(qObj);</span>
+<span class="cstat-no" title="statement not covered" >				$scope.teacherQuestions.push(qObj);</span>
+			} else {
+<span class="cstat-no" title="statement not covered" >				$scope.teacherQuestions.push(qObj);</span>
+			}
+		}
+	};
+}]);</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 12 2015 23:59:01 GMT+0000 (Greenwich Standard Time)</div>
+</div>
+
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+
+<script src="../sorter.js"></script>
+</body>
+</html>

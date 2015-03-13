@@ -237,13 +237,13 @@ function ($http, SERVER_URL) {
 angular.module('EvalApp').controller('StudentController',
 ['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
-	var token = LoginResource.getToken();
+	$scope.token = LoginResource.getToken();
 	$scope.currentUser = LoginResource.getUser();
 	$scope.myCourses = [];
 	$scope.myEvaluations = [];
 	
-	if(token !== undefined) {
-		MyResource.init(token);  //Initialize token and config in MyResource
+	if($scope.token !== '') {
+		MyResource.init($scope.token);  //Initialize token and config in MyResource
 		
 		MyResource.courses()
 		.success(function (response) {
