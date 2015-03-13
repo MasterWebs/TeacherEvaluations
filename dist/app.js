@@ -26,16 +26,12 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 angular.module("EvalApp").constant("SERVER_URL", "http://dispatch.ru.is/h22/api/v1/");
 
 angular.module('EvalApp').controller('AdminController', 
-['$scope', 'LoginResource', 'MyResource', '$location',
-function ($scope, LoginResource, MyResource, $location, EvaluationTemplateResource) {
+['$scope', '$location', 'LoginResource', 'EvaluationTemplateResource',
+function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.token = LoginResource.getToken();
 	$scope.evaluationTemplates = [];
 
-	if($scope.token === undefined) {
-		toastr.error("YOU SHALL NOT PASS");
-	}else {
-		EvaluationTemplateResource.init($scope.token);
-	}
+	EvaluationTemplateResource.init($scope.token);
 
 	EvaluationTemplateResource.getTemplates()
 	.success(function (response) {
