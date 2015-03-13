@@ -20,14 +20,14 @@
 				<input type="text" class="form-control" ng-model="qText" placeholder="Question" />
 				<input type="text" class="form-control" ng-model="qTextEN" placeholder="Question in english" />
 				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image" />
+				
 				<select class="form-control" ng-model="qType">
-					<option>Single</option>
+					<option selected="selected">Single</option>
+					<option>Text</option>
 					<option>Multiple</option>
 				</select>		
-			</form>
-
 		</div>
-		<button ng-click="createQuestion()">Add</button>
-		<button question-template class="btn btn-sm glyphicon glyphicon-plus" ng-click="addQuestion()"></button> <span>Add Question</span>
+		<!-- <button ng-click="createQuestion()">Add</button> -->
+		<button question-template class="btn btn-sm glyphicon glyphicon-plus" ng-click="createQuestion()"></button> <span>Add Question</span>
 	</div>
 </div> <!-- row -->

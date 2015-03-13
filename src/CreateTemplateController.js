@@ -1,6 +1,7 @@
 angular.module('EvalApp').controller('CreateTemplateController', 
 ['$scope', '$location', 'LoginResource', 'EvaluationTemplateResource',
 function ($scope, $location, LoginResource, EvaluationTemplateResource) {
+	$scope.token = LoginResource.getToken();
 	$scope.title = '';
 	$scope.titleEN = '';
 	$scope.intro = '';
@@ -10,12 +11,16 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.qText = '';
 	$scope.qTextEN = '';
 	$scope.qImageURL = '';
-	$scope.qType = '';
-	$scope.q = true; //boolean to decide if it is a course or a teacher question
+	$scope.qType = 'Single';
+	$scope.qTeacher = false; //boolean to decide if it is a course or a teacher question
 	$scope.tID = 0;
 	$scope.qID = 0;
 
+	if ($scope.token === undefined) {
+		toastr.error("YOU SHALL NOT PASS");
+	}
 	$scope.createTemplate = function () {
+
 		if ($scope.title === '') { 
 			toastr.error("Title cannot be empty"); 
 		} else if ($scope.titleEN === '') {
@@ -27,6 +32,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 		} else if ($scope.teacherQuestions.length === 0) {
 			toastr.error("Teacher questions are empty");
 		} else {
+			EvaluationTemplateResource.init($scope.token);
 			var templateObj = {
 				ID: $scope.tID,
 				Title: $scope.title,
@@ -36,7 +42,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 				CourseQuestions: $scope.courseQuestions,
 				TeacherQuestions: $scope.teacherQuestions
 			};
-			console.log(templateObj);
+	
 			EvaluationTemplateResource.create(templateObj)
 			.success (function (response) {
 				$scope.tID++;
@@ -59,7 +65,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 				Text: $scope.qText,
 				TextEN: $scope.qTextEN,
 				ImageURL: $scope.qImageURL,
-				Type: 'Single', //text, single, multiple
+				Type: $scope.qType, //text, single, multiple
 				Answers: {
 					ID: 0,
 					Text: '',
@@ -69,8 +75,9 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 				}
 
 			};
+			console.log("type: " + qObj.Type);
 			$scope.qID++;
-			if($scope.q === true) {
+			if($scope.qTeacher === false) {
 				$scope.courseQuestions.push(qObj);
 				$scope.teacherQuestions.push(qObj);
 			} else {

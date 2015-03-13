@@ -55,14 +55,14 @@ describe('CreateTemplateController', function () {
 				success: function (fn) {
 					// call fn() if success
 					if (tObj.ID !== null && tObj.Title !== '' && tObj.TitleEn !== '' && tObj.IntroText !== '' && 
-						tObj.IntroTextEN !== '' && tObj.TeacherQuestions.length !== 0) {
+						tObj.IntroTextEN !== '' && tObj.TeacherQuestions.length > 0) {
 						fn();
 					}
 					return {
 						error: function (errorFn) {
 							// call errorFn() if error
-							if (tObj.tID !== null || tObj.Title === '' || tObj.TitleEn !== '' || tObj.IntroText !== '' || 
-								tObj.IntroTextEN !== '' || tObj.TeacherQuestions.length !== 0) {
+							if (tObj.tID === null || tObj.Title === '' || tObj.TitleEn === '' || tObj.IntroText === '' || 
+								tObj.IntroTextEN === '' || tObj.TeacherQuestions.length === 0) {
 								errorFn();
 							}
 						}
@@ -103,7 +103,7 @@ describe('CreateTemplateController', function () {
 		$controller = _$controller_;
 	}));
 
-	describe('$scope.createQuestion', function() {
+	describe('$scope.createTemplate', function() {
 		var $scope, controller;
 
 		beforeEach(function() {
@@ -116,8 +116,11 @@ describe('CreateTemplateController', function () {
 			spyOn(toastr, 'success');
 
 			controller = $controller('CreateTemplateController',
-				{ $scope:   	$scope });
+				{ $scope:   	 $scope,
+				  $location:     mockLocation  });
 		});
+
+
 
 		it('Should not create template when everything is empty', function () {
 			$scope.tID = null;
@@ -191,7 +194,7 @@ describe('CreateTemplateController', function () {
 			$scope.intro = 'intro';
 			$scope.introEN = 'introEN';
 			$scope.courseQuestions = [];
-			$scope.teacherQuestions = ["obj"];
+			$scope.teacherQuestions = ["obj", "obj"];
 			$scope.createTemplate();
 			
 			var obj = {
@@ -205,6 +208,21 @@ describe('CreateTemplateController', function () {
 			};
 			expect(mockEvaluationTemplateResource.create).toHaveBeenCalledWith(obj);
 			expect(toastr.success).toHaveBeenCalled();
+		});
+
+		it('Should not create template when teacherQuestions is empty', function () {
+			$scope.tID = 1;
+			$scope.title = 'title';
+			$scope.titleEN = 'titleEN';
+			$scope.intro = 'intro';
+			$scope.introEN = 'introEN';
+			$scope.courseQuestions = ['obj'];
+			$scope.teacherQuestions = [];
+			$scope.createTemplate();
+
+			expect(mockEvaluationTemplateResource).not.toHaveBeenCalled();
+			expect(toastr.error).toHaveBeenCalled();
+
 		});
 	});
 });
