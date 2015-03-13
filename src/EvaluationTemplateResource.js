@@ -12,7 +12,7 @@ function ($http, SERVER_URL) {
 			return $http.get(SERVER_URL + 'evaluationtemplates', config);
 		},
 		getTemplate: function (id) {	//returns specific evaluation template
-
+			return $http.get(SERVER_URL + 'evaluationtemplates/' + id, config);
 		},
 		create: function (template) {	//creates a new evaluation template
 			return $http.post(SERVER_URL + 'evaluationtemplates', template, config);

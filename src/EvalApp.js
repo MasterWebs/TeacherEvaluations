@@ -17,6 +17,10 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				templateUrl: 'views/createTemplate.html',
 				controller: 'CreateTemplateController'
 			})
+			.when('/template/:id', {
+				templateUrl: 'views/template.html',
+				controller: 'TemplateController'
+			})
 			.otherwise({
 				redirectTo: '/login'
 			});
