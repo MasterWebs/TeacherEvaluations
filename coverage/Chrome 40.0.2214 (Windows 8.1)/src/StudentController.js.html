@@ -14,20 +14,20 @@
     </style>
 </head>
 <body>
-<div class="header medium">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">./src/StudentController.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">64.71% <small>(11 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">87.5% <small>(14 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">50% <small>(1 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">60% <small>(3 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">64.71% <small>(11 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">87.5% <small>(14 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -71,75 +71,75 @@
 34</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('EvalApp').controller('StudentController',
 ['$scope', 'LoginResource', 'MyResource', '$location',
 function ($scope, LoginResource, MyResource, $location) {
-	$scope.token = LoginResource.getToken();
-	$scope.currentUser = LoginResource.getUser();
-	$scope.myCourses = [];
-	$scope.myEvaluations = [];
-	
-	<span class="missing-if-branch" title="else path not taken" >E</span>if($scope.token !== '') {
+&nbsp;
+	if(LoginResource.isLoggedIn()) {
+		$scope.token = LoginResource.getToken();
+		$scope.currentUser = LoginResource.getUser();
+		$scope.myCourses = [];
+		$scope.myEvaluations = [];
+&nbsp;
 		MyResource.init($scope.token);  //Initialize token and config in MyResource
 		
 		MyResource.courses()
-		.success(<span class="fstat-no" title="function not covered" >function (response) {</span>
-<span class="cstat-no" title="statement not covered" >			$scope.myCourses = response;</span>
-<span class="cstat-no" title="statement not covered" >			toastr.success("Fetched courses");</span>
+		.success(function (response) {
+			$scope.myCourses = response;
+			toastr.success('Fetched courses');
 &nbsp;
 		})
-		.error(function () {
-			toastr.error("Something went wrong");
+		.error(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error('Something went wrong');</span>
 		});
 &nbsp;
 		MyResource.evaluations()
-		.success (<span class="fstat-no" title="function not covered" >function (response) {</span>
-<span class="cstat-no" title="statement not covered" >			$scope.myEvaluations = response;</span>
-<span class="cstat-no" title="statement not covered" >			console.log("Eval: " + $scope.myEvaluations);</span>
-<span class="cstat-no" title="statement not covered" >			toastr.success("Fetched evaluations");</span>
+		.success (function (response) {
+			$scope.myEvaluations = response;
+			toastr.success('Fetched evaluations');
 		})
-		.error (function () {
-			toastr.error("Could not fetch your evaluations");
+		.error (<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error('Could not fetch your evaluations');</span>
 		});
 	} else {
-<span class="cstat-no" title="statement not covered" >		toastr.error("Token undefined");</span>
+		toastr.error('No user logged in!');
 	}
 }]);</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 13 2015 11:33:07 GMT+0000 (Greenwich Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 13 2015 18:17:08 GMT+0000 (Greenwich Standard Time)</div>
 </div>
 
 <script src="../prettify.js"></script>
