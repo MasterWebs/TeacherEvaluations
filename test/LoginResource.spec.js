@@ -11,18 +11,6 @@ describe('LoginResource', function () {
 		});
 	});
 
-	/* afterEach(function () {
-		$httpBackend.verifyNoOutstandingExpectation();
-		$httpBackend.verifyNoOutstandingRequest();
-		$httpBackend.flush();
-	}); */
-
-	/* beforeEach(inject(function ($injector) {
-		$httpBackend = $injector.get('$httpBackend');
-		$httpBackend.when("GET", LOGIN_URL)
-			.respond(200, { value: 'good'});
-	})); */
-
 	it('isLoggedIn should return false for empty username', function () {
 		expect(factory.isLoggedIn()).toEqual(false);
 	});
