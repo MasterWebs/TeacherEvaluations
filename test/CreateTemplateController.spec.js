@@ -50,12 +50,15 @@ describe('CreateTemplateController', function () {
 	};
 
 	var mockEvaluationTemplateResource = {
-		create: function (tObj) {
+		init: function (_token) {
+
+		},
+		create: function (template) {
 			return {
 				success: function (fn) {
 					// call fn() if success
-					if (tObj.ID !== null && tObj.Title !== '' && tObj.TitleEn !== '' && tObj.IntroText !== '' && 
-						tObj.IntroTextEN !== '' && tObj.TeacherQuestions.length > 0) {
+					if (template.ID !== null && template.Title !== '' && template.Intro !== '' &&
+						template.IntroEN !== '' && template.TeacherQuestions.length > 0) {
 						fn();
 					}
 					return {
@@ -70,7 +73,6 @@ describe('CreateTemplateController', function () {
 				}	
 			};
 		},
-		getTemplates: function () {},
 		getTemplate: function (id) {
 			return {
 				success: function (fn) {
@@ -96,7 +98,10 @@ describe('CreateTemplateController', function () {
 					};
 				}
 			};
-		}
+		},
+		getTemplates: function () { },
+		setTemplate: function (_template) { },
+		getThisTemplate: function () {}
 	};	
 
 	beforeEach(inject(function (_$controller_) {
@@ -110,8 +115,8 @@ describe('CreateTemplateController', function () {
 			$scope = {};
 
 			spyOn(mockEvaluationTemplateResource, 'create').and.callFake();
-			spyOn(mockEvaluationTemplateResource, 'getTemplate').and.callThrough();
-			spyOn(mockEvaluationTemplateResource, 'getTemplates').and.callThrough();
+			//spyOn(mockEvaluationTemplateResource, 'getTemplate').and.callThrough();
+			//spyOn(mockEvaluationTemplateResource, 'getTemplates').and.callThrough();
 			spyOn(toastr, 'error');
 			spyOn(toastr, 'success');
 
@@ -187,13 +192,13 @@ describe('CreateTemplateController', function () {
 			expect(toastr.error).toHaveBeenCalled();
 		});
 
-		/* it('Should create template when courseQuestions is empty', function () {
+		it('Should create template when courseQuestions is empty', function () {
 			$scope.tID = 1;
 			$scope.title = 'title';
 			$scope.titleEN = 'titleEN';
 			$scope.intro = 'intro';
 			$scope.introEN = 'introEN';
-			$scope.courseQuestions = [];
+			$scope.courseQuestions = ['obj'];
 			$scope.teacherQuestions = ["obj", "obj"];
 			$scope.createTemplate();
 			
@@ -208,7 +213,7 @@ describe('CreateTemplateController', function () {
 			};
 			expect(mockEvaluationTemplateResource.create).toHaveBeenCalledWith(obj);
 			expect(toastr.success).toHaveBeenCalled();
-		}); */
+		});
 
 		/* it('Should not create template when teacherQuestions is empty', function () {
 			$scope.tID = 1;
@@ -220,9 +225,28 @@ describe('CreateTemplateController', function () {
 			$scope.teacherQuestions = [];
 			$scope.createTemplate();
 
-			expect(mockEvaluationTemplateResource).not.toHaveBeenCalled();
+			expect(mockEvaluationTemplateResource.create).not.toHaveBeenCalled();
 			expect(toastr.error).toHaveBeenCalled();
 
 		}); */
 	});
+
+	/*describe('$scope.createQuestion', function() {
+		var $scope, controller;
+
+		beforeEach(function() {
+			$scope = {};
+
+			spyOn(toastr, 'error');
+			spyOn(toastr, 'success');
+
+			controller = $controller('CreateTemplateController',
+				{ $scope:   	 $scope,
+				  $location:     mockLocation  });
+		});
+
+		it("Should not create question if text is empty", function () {
+
+		)};
+	});*/
 });
