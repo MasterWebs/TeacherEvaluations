@@ -1,6 +1,6 @@
 angular.module('EvalApp').controller('StudentController',
-['$scope', 'LoginResource', 'MyResource', '$location',
-function ($scope, LoginResource, MyResource, $location) {
+['$scope', '$location','LoginResource', 'MyResource', 'CourseResource',
+function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 
 	if(LoginResource.isLoggedIn()) {
 		$scope.token = LoginResource.getToken();
@@ -30,6 +30,7 @@ function ($scope, LoginResource, MyResource, $location) {
 		});
 
 		$scope.route = function (course) {
+			CourseResource.init($scope.token, course);
 			$location.path('/course/' + course.ID);
 		};
 	} else {
