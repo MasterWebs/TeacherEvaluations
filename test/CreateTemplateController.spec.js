@@ -64,8 +64,8 @@ describe('CreateTemplateController', function () {
 					return {
 						error: function (errorFn) {
 							// call errorFn() if error
-							if (tObj.tID === null || tObj.Title === '' || tObj.TitleEn === '' || tObj.IntroText === '' || 
-								tObj.IntroTextEN === '' || tObj.TeacherQuestions.length === 0) {
+							if (template.tID === null || template.Title === '' || template.TitleEn === '' || template.IntroText === '' || 
+								template.IntroTextEN === '' || template.TeacherQuestions.length === 0) {
 								errorFn();
 							}
 						}

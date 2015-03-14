@@ -11,14 +11,15 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.qText = '';
 	$scope.qTextEN = '';
 	$scope.qImageURL = '';
-	$scope.qType = 'Single';
-	$scope.qTeacher = false; //boolean to decide if it is a course or a teacher question
+	$scope.qType = 'Text';
+	$scope.qTeacher = false; //boolean to decide if it is a course and/or a teacher question
 	$scope.tID = 0;
 	$scope.qID = 0;
 
 	if ($scope.token === undefined) {
 		toastr.error("YOU SHALL NOT PASS");
 	}
+
 	$scope.createTemplate = function () {
 
 		if ($scope.title === '') { 
@@ -60,30 +61,36 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 		} else if ($scope.qTextEN === '') {
 			toastr.error("Questin text in english cannot be empty");
 		} else {
-			var qObj = {
-				ID: $scope.qID,
-				Text: $scope.qText,
-				TextEN: $scope.qTextEN,
-				ImageURL: $scope.qImageURL,
-				Type: $scope.qType, //text, single, multiple
-				Answers: {
-					ID: 0,
-					Text: '',
-					TextEN: '',
-          			ImageURL: '',
-          			Weight: 0
-				}
-
-			};
-			console.log("type: " + qObj.Type);
+			var qObj = {};
+			if($scope.qType === 'Single' || $scope.qType === 'Multiple') {//add answers array
+				console.log('single | multi');
+				qObj = {
+					ID: $scope.qID,
+					Text: $scope.qText,
+					TextEN: $scope.qTextEN,
+					ImageURL: $scope.qImageURL,
+					Type: $scope.qType, //single, multiple
+					Answers: []
+				};
+			} else {  // qType = text, no answer array
+				console.log('Text');
+				qObj = {
+					ID: $scope.qID,
+					Text: $scope.qText,
+					TextEN: $scope.qTextEN,
+					ImageURL: $scope.qImageURL,
+					Type: $scope.qType
+				};
+			}
+	
 			$scope.qID++;
 			if($scope.qTeacher === false) {
-				console.log("both");
 				$scope.courseQuestions.push(qObj);
 				$scope.teacherQuestions.push(qObj);
+				toastr.success("Added question related to course and teachers");
 			} else {
-				console.log("teacher only");
 				$scope.teacherQuestions.push(qObj);
+				toastr.success("Added question related to teachers");
 			}
 		}
 	};
