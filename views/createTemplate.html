@@ -3,9 +3,9 @@
 		<h3>Create Template</h3>
 		<div class="form-group"> 
 			<form ng-submit="createTemplate()">
-				<input type="text" class="form-control" ng-model="title" placeholder="Titill á íslensku" />
+				<input type="text" class="form-control" ng-model="title" placeholder="Title in icelandic" />
 				<input type="text" class="form-control" ng-model="titleEN" placeholder="Title in english" />
-				<textarea  class="form-control" ng-model="intro" placeholder="Kynning á íslensku"> </textarea>
+				<textarea  class="form-control" ng-model="intro" placeholder="Intro in icelandic"> </textarea>
 				<textarea  class="form-control" ng-model="introEN" placeholder="Intro in english"> </textarea>
 				<input type="submit" value="create"  class="btn btn-default" />
 			</form>
@@ -19,13 +19,21 @@
 			<form>
 				<input type="text" class="form-control" ng-model="qText" placeholder="Question" />
 				<input type="text" class="form-control" ng-model="qTextEN" placeholder="Question in english" />
-				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image" />
-				
-				<select class="form-control" ng-model="qType">
-					<option selected="selected">Single</option>
-					<option>Text</option>
-					<option>Multiple</option>
-				</select>		
+				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image URL" />
+				<span>Type of question
+					<select class="form-control" ng-model="qType">
+						<option>Single</option>
+						<option>Text</option>
+						<option>Multiple</option>
+					</select>
+				</span>		
+				<span>Questions relate to
+					<select class="form-control">
+						<option ng-click="qTeacher = false;">Course and teachers</option>
+						<option ng-click="qTeacher = true">Only teachers </option>
+					</select> 
+				</span>
+			</form>
 		</div>
 		<!-- <button ng-click="createQuestion()">Add</button> -->
 		<button question-template class="btn btn-sm glyphicon glyphicon-plus" ng-click="createQuestion()"></button> <span>Add Question</span>

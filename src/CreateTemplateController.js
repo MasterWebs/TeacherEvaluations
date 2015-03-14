@@ -78,9 +78,11 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			console.log("type: " + qObj.Type);
 			$scope.qID++;
 			if($scope.qTeacher === false) {
+				console.log("both");
 				$scope.courseQuestions.push(qObj);
 				$scope.teacherQuestions.push(qObj);
 			} else {
+				console.log("teacher only");
 				$scope.teacherQuestions.push(qObj);
 			}
 		}
