@@ -27,8 +27,6 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 		.success(function (response) {
 			EvaluationTemplateResource.setTemplate(response);
 			$location.path('/template/' + response.ID);
-			//TODO Send to factory or route params
-
 
 		})
 		.error(function () {

@@ -2,6 +2,7 @@ angular.module('EvalApp').factory('EvaluationTemplateResource',
 ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
 	var config = '';
+	var template = [];
 
 	return {
 		init: function (_token) {	//initializes the config
@@ -16,7 +17,13 @@ function ($http, SERVER_URL) {
 		},
 		create: function (template) {	//creates a new evaluation template
 			return $http.post(SERVER_URL + 'evaluationtemplates', template, config);
+		},
+		setTemplate: function (_template) {
+			template = [];
+			template = _template;
+		},
+		getThisTemplate: function () {
+			return template;
 		}
-
 	};
 }]);
