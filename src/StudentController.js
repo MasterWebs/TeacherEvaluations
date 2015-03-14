@@ -28,6 +28,10 @@ function ($scope, LoginResource, MyResource, $location) {
 		.error (function () {
 			toastr.error('Could not fetch your evaluations');
 		});
+
+		$scope.route = function (course) {
+			$location.path('/course/' + course.ID);
+		};
 	} else {
 		toastr.error('No user logged in!');
 	}

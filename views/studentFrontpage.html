@@ -1,13 +1,13 @@
 <div class="col-md-4">
 	<h3>Your courses</h3>
 	<ul>
-		<li ng-repeat="course in myCourses"> {{course.Name}}</li>
+		<li ng-repeat="course in myCourses"> <a ng-click="route(course)">{{course.Name}} - {{course.NameEN}}</a></li>
 	</ul>
 </div>
 
 <div class="col-md-4">
 	<h3>Your evaluations</h3>
 	<ul>
-		<li ng-repeat="eval in myEvaluations"> {{eval.CourseName}}</li>
+		<li ng-repeat="eval in myEvaluations"> {{eval.CourseName}} </li>
 	</ul>
 </div>

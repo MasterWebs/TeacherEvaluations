@@ -9,6 +9,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	if($scope.role !== 'admin') {
 		$location.path('/login');
 	}
+	
 	EvaluationTemplateResource.init($scope.token);
 
 	EvaluationTemplateResource.getTemplates()
