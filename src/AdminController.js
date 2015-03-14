@@ -3,8 +3,12 @@ angular.module('EvalApp').controller('AdminController',
 function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.user = LoginResource.getUser();
 	$scope.token = LoginResource.getToken();
+	$scope.role = LoginResource.getRole();
 	$scope.evaluationTemplates = [];
-
+	
+	if($scope.role !== 'admin') {
+		$location.path('/login');
+	}
 	EvaluationTemplateResource.init($scope.token);
 
 	EvaluationTemplateResource.getTemplates()
@@ -33,6 +37,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			toastr.error("Could not fetch template");
 		});
 	};
+
 
 
 }]);
