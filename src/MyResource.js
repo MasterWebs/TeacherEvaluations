@@ -1,4 +1,5 @@
-angular.module("EvalApp").factory("MyResource", ['$http', 'SERVER_URL',
+angular.module("EvalApp").factory("MyResource", 
+['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
 	var config = '';
 	
@@ -7,8 +8,11 @@ function ($http, SERVER_URL) {
 			var token = 'Basic ' + _token;
 			config = {headers:{'Authorization': token}};
 		},
-		courses: function () { return $http.get(SERVER_URL + 'my/courses', config); },
-		evaluations: function () { return $http.get(SERVER_URL + 'my/evaluations', config); }		
-
+		courses: function () { 
+			return $http.get(SERVER_URL + 'my/courses', config); 
+		},
+		evaluations: function () { 
+			return $http.get(SERVER_URL + 'my/evaluations', config); 
+		}		
 	};
 }]);
