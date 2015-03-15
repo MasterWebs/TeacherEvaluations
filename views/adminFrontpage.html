@@ -3,16 +3,22 @@
 		<h3>Operations</h3>
 		<ul>
 			<li><a ng-click="redirect('create')">Create evaluation template</a></li>
-			<li><a ng-click="redirect('evaluation')">Create new evaluation</a></li>
+			<!-- <li><a ng-click="redirect('getOne')">Get specific evaluation template</a></li>-->
 		</ul>
 	</div> <!-- col-md-4 -->
 
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<h3>All evaluation Templates</h3>
 
-		<ul ng-repeat="template in evaluationTemplates">
-			<li  ng-click="getTemplate(template)"> <a>{{template.Title}} - {{template.TitleEN}}</a> </li>
-		</ul>
+		<div ng-repeat="template in evaluationTemplates">
+			<!-- <li ng-click="getTemplate(template)"> <a>{{template.Title}} - {{template.TitleEN}}</a> </li> -->
+			<div class="col-md-4">
+				<div class="well well-sm" ng-click="getTemplate(template)">
+					<h4>{{template.Title}}<h4>
+					<h4>{{template.TitleEN}}</h4>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </div> <!-- row -->
