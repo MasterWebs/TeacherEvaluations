@@ -1,3 +1,21 @@
 <div ng-model="template" class="col-md-6">
-	{{template.Title}}
+	<h2>{{template.Title}} - {{template.TitleEN}}</h2>
+	<p>{{template.Intro}}</p>
+	<p>{{template.IntroEN}}</p>
+
+	<h3>Course Questions</h3>
+	<div ng-repeat="cq in cQuestions">
+		<p>Text: {{cq.Text}}</p>
+		<p>TextEN: {{cq.TextEN}}</p>
+		<p>Type: {{cq.Type}}</p>
+		<p>ANSWERS</p>
+	</div>
+
+	<h3>Teacher Questions</h3>
+	<div ng-repeat="tq in tQuestions">
+		<p>Text: {{cq.Text}}</p>
+		<p>TextEN: {{cq.TextEN}}</p>
+		<p>Type: {{cq.Type}}</p>
+		<p>ANSWERS</p>
+	</div>
 </div>
