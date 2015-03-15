@@ -22,17 +22,10 @@
 				<input type="text" class="form-control" ng-model="qTextEN" placeholder="Question in english" />
 				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image URL" />
 				<span>Type of question
-					<select class="form-control" ng-model="qType">
-						<option>Text</option>
-						<option>Single</option>
-						<option>Multiple</option>
-					</select>
+					<select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"></select>
 				</span>		
 				<span>Questions relate to
-					<select class="form-control">
-						<option ng-click="qTeacher = false;">Course and teachers</option>
-						<option ng-click="qTeacher = true">Only teachers </option>
-					</select> 
+					<select class="form-control" ng-model="relate" ng-options="option.to for option in optionRelate"></select> 
 				</span>
 			</form>
 		</div>

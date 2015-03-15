@@ -12,8 +12,10 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.qText = '';
 	$scope.qTextEN = '';
 	$scope.qImageURL = '';
-	$scope.qType = 'Text';
-	$scope.qTeacher = false; //boolean to decide if it is a course and/or a teacher question
+	$scope.qTypeOption = [ {opt: 'Text'}, {opt: 'Single'}, {opt: 'Multiple'} ];
+	$scope.qType = $scope.qTypeOption[0];
+	$scope.optionRelate = [ {to:'Courses'}, {to:'Teachers'}, {to:'Course & Teachers'} ];
+	$scope.relate = $scope.optionRelate[0];
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
@@ -29,7 +31,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			toastr.error("Intro cannot be empty");
 		} else if ($scope.introEN === '') {
 			toastr.error("Intro in english cannot be empty");
-		} else if ($scope.teacherQuestions.length === 0) {
+		} else if ($scope.teacherQuestions.length === 0 && $scope.courseQuestions.length === 0) {
 			toastr.error("You need to add a question first");
 		} else {
 			EvaluationTemplateResource.init($scope.token);
@@ -60,14 +62,14 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			toastr.error("Questin text in english cannot be empty");
 		} else {
 			var qObj = {};
-			if($scope.qType === 'Single' || $scope.qType === 'Multiple') {//add answers array
+			if($scope.qType.opt === 'Single' || $scope.qType.opt === 'Multiple') {//add answers array
 				console.log('single | multi');
 				qObj = {
 					ID: 0,
 					Text: $scope.qText,
 					TextEN: $scope.qTextEN,
 					ImageURL: $scope.qImageURL,
-					Type: $scope.qType, //single, multiple
+					Type: $scope.qType.opt, //single, multiple
 					Answers: []
 				};
 			} else {  // qType = text, no answer array
@@ -77,17 +79,21 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 					Text: $scope.qText,
 					TextEN: $scope.qTextEN,
 					ImageURL: $scope.qImageURL,
-					Type: $scope.qType
+					Type: $scope.qType.opt
 				};
 			}
-	
-			if($scope.qTeacher === false) {
+			
+			//ATTENTION - Needd to add for course and teachers!
+			if($scope.relate.to === 'Courses') {	
+				$scope.courseQuestions.push(qObj);
+				toastr.success("Added question to Courses");
+			} else if ($scope.relate.to === 'Teachers') {
+				$scope.teacherQuestions.push(qObj);
+				toastr.success("Added question to teachers");
+			} else { //Course and teachers
 				$scope.courseQuestions.push(qObj);
 				$scope.teacherQuestions.push(qObj);
-				toastr.success("Added question related to course and teachers");
-			} else {
-				$scope.teacherQuestions.push(qObj);
-				toastr.success("Added question related to teachers");
+				toastr.success("Added question to courses and teachers");
 			}
 		}
 	};
