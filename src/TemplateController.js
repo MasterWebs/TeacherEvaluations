@@ -3,7 +3,9 @@ angular.module('EvalApp').controller('TemplateController',
 function ($scope, $location, EvaluationTemplateResource, LoginResource) {
 	$scope.role = LoginResource.getRole();
 	$scope.template = EvaluationTemplateResource.getThisTemplate();
-	console.log($scope.template);
+	$scope.cQuestions = $scope.template.CourseQuestions;
+	$scope.tQuestions = $scope.template.TeacherQuestions;
+	console.log($scope.cQuestions);
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
@@ -12,7 +14,7 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource) {
 	if ($scope.template === undefined) {
 		toastr.error("undefined template");
 	} else {
-		console.log($scope.template);
+		//
 	}
 
 }]);
