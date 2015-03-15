@@ -1,20 +1,22 @@
 angular.module('EvalApp').controller('StudentController',
 ['$scope', '$location','LoginResource', 'MyResource', 'CourseResource',
 function ($scope, $location, LoginResource, MyResource, CourseResource ) {
+	$scope.role = LoginResource.getRole();
+	$scope.token = LoginResource.getToken();
+	$scope.currentUser = LoginResource.getUser();
+	$scope.myCourses = [];
+	$scope.myEvaluations = [];
 
-	if(LoginResource.isLoggedIn()) {
-		$scope.token = LoginResource.getToken();
-		$scope.currentUser = LoginResource.getUser();
-		$scope.myCourses = [];
-		$scope.myEvaluations = [];
+	if($scope.role !== 'student') {
+		toastr.error('You are not a student');
+		$location.path('/login');
+	} else {
 
 		MyResource.init($scope.token);  //Initialize token and config in MyResource
 		
 		MyResource.courses()
 		.success(function (response) {
 			$scope.myCourses = response;
-			toastr.success('Fetched courses');
-
 		})
 		.error(function () {
 			toastr.error('Something went wrong');
@@ -23,7 +25,6 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 		MyResource.evaluations()
 		.success (function (response) {
 			$scope.myEvaluations = response;
-			toastr.success('Fetched evaluations');
 		})
 		.error (function () {
 			toastr.error('Could not fetch your evaluations');
@@ -33,7 +34,5 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 			CourseResource.init($scope.token, course);
 			$location.path('/course/' + course.ID);
 		};
-	} else {
-		toastr.error('No user logged in!');
 	}
 }]);
