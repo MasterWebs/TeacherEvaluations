@@ -18,16 +18,16 @@
     <h1>Code coverage report for <span class="entity">./src/StudentController.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">87.5% <small>(14 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">100% <small>(19 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">60% <small>(3 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">87.5% <small>(14 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(19 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -68,78 +68,87 @@
 31
 32
 33
-34</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+34
+35
+36
+37</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('EvalApp').controller('StudentController',
-['$scope', 'LoginResource', 'MyResource', '$location',
-function ($scope, LoginResource, MyResource, $location) {
+['$scope', '$location','LoginResource', 'MyResource', 'CourseResource',
+function ($scope, $location, LoginResource, MyResource, CourseResource ) {
+	$scope.role = LoginResource.getRole();
+	$scope.token = LoginResource.getToken();
+	$scope.currentUser = LoginResource.getUser();
+	$scope.myCourses = [];
+	$scope.myEvaluations = [];
 &nbsp;
-	if(LoginResource.isLoggedIn()) {
-		$scope.token = LoginResource.getToken();
-		$scope.currentUser = LoginResource.getUser();
-		$scope.myCourses = [];
-		$scope.myEvaluations = [];
-&nbsp;
+	if($scope.role !== 'student') {
+		toastr.error('You are not a student');
+		$location.path('/login');
+	} else {
 		MyResource.init($scope.token);  //Initialize token and config in MyResource
 		
 		MyResource.courses()
 		.success(function (response) {
 			$scope.myCourses = response;
-			toastr.success('Fetched courses');
-&nbsp;
 		})
-		.error(<span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >			toastr.error('Something went wrong');</span>
+		.error(function () {
+			toastr.error('Could not fetch your courses');
 		});
 &nbsp;
 		MyResource.evaluations()
 		.success (function (response) {
 			$scope.myEvaluations = response;
-			toastr.success('Fetched evaluations');
 		})
-		.error (<span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >			toastr.error('Could not fetch your evaluations');</span>
+		.error (function () {
+			toastr.error('Could not fetch your evaluations');
 		});
-	} else {
-		toastr.error('No user logged in!');
+&nbsp;
+		$scope.route = function (course) {
+			CourseResource.init($scope.token, course);
+			$location.path('/course/' + course.ID);
+		};
 	}
 }]);</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 13 2015 22:39:50 GMT+0000 (Greenwich Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 16 2015 14:33:25 GMT+0000 (Greenwich Standard Time)</div>
 </div>
 
 <script src="../prettify.js"></script>

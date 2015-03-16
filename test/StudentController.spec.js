@@ -4,12 +4,14 @@ describe('StudentController', function () {
 
 	var mockLoginResourceWithToken = {
 		getUser: function () { return 'user'; },
+		getRole: function () { return 'student'; },
 		getToken: function () { return 't0k3n'; },
 		isLoggedIn: function () { return true; }
 	};
 
 	var mockLoginResourceNoToken = {
 		getUser: function () { return ''; },
+		getRole: function () { return ''; },
 		getToken: function () { return ''; },
 		isLoggedIn: function () { return false; }
 	};
@@ -64,8 +66,44 @@ describe('StudentController', function () {
 		}
 	};
 
+	var mockMyResourceError = {
+		init: function (token) { },
+
+		courses: function () {
+			return {
+				success: function (fn) {
+					// fn() if success
+					return {
+						error: function (errorFn) {
+							// errorFn() if error
+								errorFn();
+						}
+					};
+				}
+			};
+		},
+
+		evaluations: function () {
+			return {
+				success: function (fn) {
+					// fn() if success
+					return {
+						error: function (errorFn) {
+							// errorFn() if error
+							errorFn();
+						}
+					};
+				}
+			};
+		}
+	};
+
 	var mockLocation = {
 		path: function (location) { }
+	};
+
+	var mockCourseResource = {
+		init: function (token, course) { }
 	};
 
 	beforeEach(function () {
@@ -74,19 +112,28 @@ describe('StudentController', function () {
 		inject(function ($controller, $rootScope) {
 			scope = $rootScope.$new();
 
-			createController = function (isToken) {
+			createController = function (isToken, isError) {
 				var mockLogin;
+				var mockMy;
+
 				if (isToken) {
 					mockLogin = mockLoginResourceWithToken;
 				} else {
 					mockLogin = mockLoginResourceNoToken;
 				}
+
+				if (isError) {
+					mockMy = mockMyResourceError;
+				} else {
+					mockMy = mockMyResource;
+				}
 		
 				return $controller('StudentController',
-					{ $scope: 		 scope,
-					  LoginResource: mockLogin,
-					  MyResource: 	 mockMyResource,
-					  $location: 	 mockLocation});
+					{ $scope: 		  scope,
+					  $location:      mockLocation,
+					  LoginResource:  mockLogin,
+					  MyResource: 	  mockMy,
+					  CourseResource: mockCourseResource});
 			};
 		});
 
@@ -98,44 +145,58 @@ describe('StudentController', function () {
 		spyOn(mockMyResource, 'init');
 		spyOn(mockMyResource, 'courses').and.callThrough();
 		spyOn(mockMyResource, 'evaluations').and.callThrough();
+		spyOn(mockCourseResource, 'init');
 		spyOn(toastr, 'error');
 		spyOn(toastr, 'success');
 	});
 
-	describe('when the token is undefined', function () {
-
-		it('should not get token from LoginResource', function () {
-			var controller = createController(false);
-			expect(mockLoginResourceNoToken.getToken).not.toHaveBeenCalled();
-			expect(mockLoginResourceNoToken.getUser).not.toHaveBeenCalled();
-		});
-
-		it('should alert with toastr if token is undefined', function () {
-			var controller = createController(false);
+	describe('when the user is not logged in as student', function () {
+		it('should alert with toastr and redirect user to login', function () {
+			var controller = createController(false, false);
 			// expect(scope.token).toEqual('');
-			expect(toastr.error).toHaveBeenCalledWith('No user logged in!');
+			expect(toastr.error).toHaveBeenCalledWith('You are not a student');
+			expect(mockLocation.path).toHaveBeenCalledWith('/login');
 		});
 	});
 
 	describe('when the token is defined', function () {
 
 		it('should call init with token if token is defined', function () {
-			var controller = createController(true);
+			var controller = createController(true, false);
 			expect(mockMyResource.init).toHaveBeenCalledWith(scope.token);
 		});
 
 		it('should call courses if token is defined', function () {
-			var controller = createController(true);
+			var controller = createController(true, false);
 			expect(mockMyResource.courses).toHaveBeenCalled();
 			expect(scope.myCourses.length).toEqual(3);
-			expect(toastr.success).toHaveBeenCalledWith('Fetched courses');
 		});
 
 		it('should call evaluations if token is defined', function () {
-			var controller = createController(true);
+			var controller = createController(true, false);
 			expect(mockMyResource.evaluations).toHaveBeenCalled();
 			expect(scope.myEvaluations.length).toEqual(2);
-			expect(toastr.success).toHaveBeenCalledWith('Fetched evaluations');
+		});
+
+		it('should redirect user to correct course, and initialize CourseResource', function () {
+			var controller = createController(true, false);
+			var course = {
+				ID: 1,
+				CourseID: 1,
+				Name: 'Vefforritun',
+				NameEN: 'Web Programming'
+			};
+			scope.route(course);
+			expect(mockCourseResource.init).toHaveBeenCalledWith(scope.token, course);
+			expect(mockLocation.path).toHaveBeenCalledWith('/course/1');
+		});
+	});
+
+	describe('when myResource returns an error', function () {
+		it('should alert that courses and evaluations could not be fetched', function () {
+			var controller = createController(true, true);
+			expect(toastr.error).toHaveBeenCalledWith('Could not fetch your courses');
+			expect(toastr.error).toHaveBeenCalledWith('Could not fetch your evaluations');
 		});
 	});
 });

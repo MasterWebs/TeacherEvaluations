@@ -11,7 +11,6 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 		toastr.error('You are not a student');
 		$location.path('/login');
 	} else {
-
 		MyResource.init($scope.token);  //Initialize token and config in MyResource
 		
 		MyResource.courses()
@@ -19,7 +18,7 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 			$scope.myCourses = response;
 		})
 		.error(function () {
-			toastr.error('Something went wrong');
+			toastr.error('Could not fetch your courses');
 		});
 
 		MyResource.evaluations()

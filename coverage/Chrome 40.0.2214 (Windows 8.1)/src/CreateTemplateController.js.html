@@ -14,20 +14,20 @@
     </style>
 </head>
 <body>
-<div class="header medium">
+<div class="header low">
     <h1>Code coverage report for <span class="entity">./src/CreateTemplateController.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">52.17% <small>(24 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">48.15% <small>(26 / 54)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">33.33% <small>(6 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">23.08% <small>(6 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class="metric">40% <small>(2 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">52.17% <small>(24 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">48.15% <small>(26 / 54)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -122,7 +122,19 @@
 85
 86
 87
-88</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
@@ -139,9 +151,11 @@
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,7 +184,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -185,11 +198,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,7 +225,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,6 +237,7 @@
 ['$scope', '$location', 'LoginResource', 'EvaluationTemplateResource',
 function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.token = LoginResource.getToken();
+	$scope.role = LoginResource.getRole();
 	$scope.title = '';
 	$scope.titleEN = '';
 	$scope.intro = '';
@@ -222,14 +247,15 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.qText = '';
 	$scope.qTextEN = '';
 	$scope.qImageURL = '';
-	$scope.qType = 'Single';
-	$scope.qTeacher = false; //boolean to decide if it is a course or a teacher question
-	$scope.tID = 0;
-	$scope.qID = 0;
+	$scope.qTypeOption = [ {opt: 'Text'}, {opt: 'Single'}, {opt: 'Multiple'} ];
+	$scope.qType = $scope.qTypeOption[0];
+	$scope.optionRelate = [ {to:'Courses'}, {to:'Teachers'}, {to:'Course &amp; Teachers'} ];
+	$scope.relate = $scope.optionRelate[0];
 &nbsp;
-	<span class="missing-if-branch" title="if path not taken" >I</span>if ($scope.token === undefined) {
-<span class="cstat-no" title="statement not covered" >		toastr.error("YOU SHALL NOT PASS");</span>
+	<span class="missing-if-branch" title="else path not taken" >E</span>if ($scope.role !== 'admin') {
+		$location.path('/login');
 	}
+&nbsp;
 	$scope.createTemplate = function () {
 &nbsp;
 		if ($scope.title === '') { 
@@ -240,12 +266,12 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			toastr.error("Intro cannot be empty");
 		} else <span class="cstat-no" title="statement not covered" >if ($scope.introEN === '') {</span>
 <span class="cstat-no" title="statement not covered" >			toastr.error("Intro in english cannot be empty");</span>
-		} else <span class="cstat-no" title="statement not covered" >if ($scope.teacherQuestions.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >			toastr.error("Teacher questions are empty");</span>
+		} else <span class="cstat-no" title="statement not covered" >if ($scope.teacherQuestions.length === 0 &amp;&amp; $scope.courseQuestions.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >			toastr.error("You need to add a question first");</span>
 		} else {
 <span class="cstat-no" title="statement not covered" >			EvaluationTemplateResource.init($scope.token);</span>
 <span class="cstat-no" title="statement not covered" >			var templateObj = {</span>
-				ID: $scope.tID,
+				ID: 0,
 				Title: $scope.title,
 				TitleEN: $scope.titleEN,
 				IntroText: $scope.intro,
@@ -256,7 +282,6 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	
 <span class="cstat-no" title="statement not covered" >			EvaluationTemplateResource.create(templateObj)</span>
 			.success (<span class="fstat-no" title="function not covered" >function (response) {</span>
-<span class="cstat-no" title="statement not covered" >				$scope.tID++;</span>
 <span class="cstat-no" title="statement not covered" >				toastr.success("Created evaluation template");</span>
 			})
 			.error (<span class="fstat-no" title="function not covered" >function () {</span>
@@ -271,28 +296,39 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 		} else <span class="cstat-no" title="statement not covered" >if ($scope.qTextEN === '') {</span>
 <span class="cstat-no" title="statement not covered" >			toastr.error("Questin text in english cannot be empty");</span>
 		} else {
-<span class="cstat-no" title="statement not covered" >			var qObj = {</span>
-				ID: $scope.qID,
-				Text: $scope.qText,
-				TextEN: $scope.qTextEN,
-				ImageURL: $scope.qImageURL,
-				Type: $scope.qType, //text, single, multiple
-				Answers: {
+<span class="cstat-no" title="statement not covered" >			var qObj = {};</span>
+<span class="cstat-no" title="statement not covered" >			if($scope.qType.opt === 'Single' || $scope.qType.opt === 'Multiple') {//add answers array</span>
+<span class="cstat-no" title="statement not covered" >				console.log('single | multi');</span>
+<span class="cstat-no" title="statement not covered" >				qObj = {</span>
 					ID: 0,
-					Text: '',
-					TextEN: '',
-          			ImageURL: '',
-          			Weight: 0
-				}
-&nbsp;
-			};
-<span class="cstat-no" title="statement not covered" >			console.log("type: " + qObj.Type);</span>
-<span class="cstat-no" title="statement not covered" >			$scope.qID++;</span>
-<span class="cstat-no" title="statement not covered" >			if($scope.qTeacher === false) {</span>
+					Text: $scope.qText,
+					TextEN: $scope.qTextEN,
+					ImageURL: $scope.qImageURL,
+					Type: $scope.qType.opt, //single, multiple
+					Answers: []
+				};
+			} else {  // qType = text, no answer array
+<span class="cstat-no" title="statement not covered" >				console.log('Text');</span>
+<span class="cstat-no" title="statement not covered" >				qObj = {</span>
+					ID: $scope.qID,
+					Text: $scope.qText,
+					TextEN: $scope.qTextEN,
+					ImageURL: $scope.qImageURL,
+					Type: $scope.qType.opt
+				};
+			}
+			
+			//ATTENTION - Needd to add for course and teachers!
+<span class="cstat-no" title="statement not covered" >			if($scope.relate.to === 'Courses') {	</span>
+<span class="cstat-no" title="statement not covered" >				$scope.courseQuestions.push(qObj);</span>
+<span class="cstat-no" title="statement not covered" >				toastr.success("Added question to Courses");</span>
+			} else <span class="cstat-no" title="statement not covered" >if ($scope.relate.to === 'Teachers') {</span>
+<span class="cstat-no" title="statement not covered" >				$scope.teacherQuestions.push(qObj);</span>
+<span class="cstat-no" title="statement not covered" >				toastr.success("Added question to teachers");</span>
+			} else { //Course and teachers
 <span class="cstat-no" title="statement not covered" >				$scope.courseQuestions.push(qObj);</span>
 <span class="cstat-no" title="statement not covered" >				$scope.teacherQuestions.push(qObj);</span>
-			} else {
-<span class="cstat-no" title="statement not covered" >				$scope.teacherQuestions.push(qObj);</span>
+<span class="cstat-no" title="statement not covered" >				toastr.success("Added question to courses and teachers");</span>
 			}
 		}
 	};
@@ -301,7 +337,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 13 2015 22:39:50 GMT+0000 (Greenwich Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 16 2015 14:33:25 GMT+0000 (Greenwich Standard Time)</div>
 </div>
 
 <script src="../prettify.js"></script>

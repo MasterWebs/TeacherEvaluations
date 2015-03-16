@@ -192,7 +192,7 @@ describe('CreateTemplateController', function () {
 			expect(toastr.error).toHaveBeenCalled();
 		});
 
-		it('Should create template when courseQuestions is empty', function () {
+		/* it('Should create template when courseQuestions is empty', function () {
 			$scope.tID = 1;
 			$scope.title = 'title';
 			$scope.titleEN = 'titleEN';
@@ -213,7 +213,7 @@ describe('CreateTemplateController', function () {
 			};
 			expect(mockEvaluationTemplateResource.create).toHaveBeenCalledWith(obj);
 			expect(toastr.success).toHaveBeenCalled();
-		});
+		}); */
 
 		/* it('Should not create template when teacherQuestions is empty', function () {
 			$scope.tID = 1;
