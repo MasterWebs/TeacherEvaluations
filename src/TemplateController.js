@@ -22,10 +22,6 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 	}
 
 	$scope.createEvaluation = function () {
-		console.log($scope.template.ID);
-		console.log($scope.startDate.value.toISOString());
-		console.log($scope.endDate.value.toISOString());
-
 		var evaluation = {
 			TemplateID: $scope.template.ID,
 			StartDate: $scope.startDate.value.toISOString(),
