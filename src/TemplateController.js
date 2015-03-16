@@ -10,7 +10,7 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 	$scope.endDate = { value: new Date() };
 
 	EvaluationResource.init($scope.token);
-	
+
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
 	}
@@ -35,6 +35,7 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 		EvaluationResource.createEvaluation (evaluation)
 		.success(function () {
 			toastr.success("Created evaluation");
+			$location.path('/admin');
 		})
 		.error(function () {
 			toastr.error("Could not create evaluation");

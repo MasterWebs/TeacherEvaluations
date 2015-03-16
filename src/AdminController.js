@@ -14,7 +14,6 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 
 		EvaluationTemplateResource.getTemplates()
 		.success(function (response) {
-			toastr.success("Fetched all templates");
 			$scope.evaluationTemplates = response;
 		})
 		.error(function () {
