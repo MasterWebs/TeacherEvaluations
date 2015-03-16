@@ -51,9 +51,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 		};
 
 		$scope.getEvaluation = function (evaluation) {
-			console.log(evaluation.ID);
 			EvaluationResource.setEvaluation(evaluation);
-
 			$location.path('evaluation/' + evaluation.ID);
 		};
 

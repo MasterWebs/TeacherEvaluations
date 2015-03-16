@@ -4,7 +4,7 @@ function ($scope, $location, CourseResource, LoginResource) {
 	$scope.role = LoginResource.getRole();
 	$scope.course = CourseResource.getCurrentCourse();
 	$scope.semester = '1';
-	$scope.teachers = [];
+	$scope.teachers = [];	
 
 	if($scope.role !== 'student') {
 		toastr.error('Your are not a student');
