@@ -153,7 +153,6 @@ describe('StudentController', function () {
 	describe('when the user is not logged in as student', function () {
 		it('should alert with toastr and redirect user to login', function () {
 			controller = createController(false, false);
-			// expect(scope.token).toEqual('');
 			expect(toastr.error).toHaveBeenCalledWith('You are not a student');
 			expect(mockLocation.path).toHaveBeenCalledWith('/login');
 		});
@@ -163,6 +162,7 @@ describe('StudentController', function () {
 		beforeEach(function () {
 			controller = createController(true, false);
 		});
+		
 		it('should call init with token if token is defined', function () {
 			expect(mockMyResource.init).toHaveBeenCalledWith(scope.token);
 		});
