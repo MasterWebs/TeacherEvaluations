@@ -1,21 +1,29 @@
 angular.module('EvalApp').controller('AdminController', 
-['$scope', '$location', 'LoginResource', 'EvaluationTemplateResource',
-function ($scope, $location, LoginResource, EvaluationTemplateResource) {
+['$scope', '$location', 'LoginResource', 'EvaluationTemplateResource', 'EvaluationResource',
+function ($scope, $location, LoginResource, EvaluationTemplateResource, EvaluationResource) {
 	$scope.user = LoginResource.getUser();
 	$scope.token = LoginResource.getToken();
 	$scope.role = LoginResource.getRole();
 	$scope.evaluationTemplates = [];
+	$scope.evaluations = [];
 	
 	if($scope.role !== 'admin') {
 		$location.path('/login');
 	} else {
 	
 		EvaluationTemplateResource.init($scope.token);
+		EvaluationResource.init($scope.token);
+
+		EvaluationResource.getEvaluations()
+		.success(function (response) {
+			$scope.evaluations = response;
+		})
+		.error( function () {
+			toastr.error("Could not fetch evaluations");
+		});
 
 		EvaluationTemplateResource.getTemplates()
 		.success(function (response) {
-			toastr.success("Fetched all templates");
-			console.log(response);
 			$scope.evaluationTemplates = response;
 		})
 		.error(function () {
@@ -40,6 +48,13 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			.error(function () {
 				toastr.error("Could not fetch template");
 			});
+		};
+
+		$scope.getEvaluation = function (evaluation) {
+			console.log(evaluation.ID);
+			EvaluationResource.setEvaluation(evaluation);
+
+			$location.path('evaluation/' + evaluation.ID);
 		};
 
 	}

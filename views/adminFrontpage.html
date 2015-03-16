@@ -5,6 +5,11 @@
 			<li><a ng-click="redirect('create')">Create evaluation template</a></li>
 			<!-- <li><a ng-click="redirect('getOne')">Get specific evaluation template</a></li>-->
 		</ul>
+
+		<h3>Evaluations</h3>
+		<ul >
+			<li ng-repeat="eval in evaluations"><a ng-click="getEvaluation(eval)">{{eval.TemplateTitle}}</a></li>
+		</ul>
 	</div> <!-- col-md-4 -->
 
 	<div class="col-md-8">
