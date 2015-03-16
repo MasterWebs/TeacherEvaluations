@@ -15,7 +15,6 @@ function ($http, SERVER_URL) {
 			return $http.get(SERVER_URL + 'evaluations/' + id, config);
 		},
 		createEvaluation: function (evaluation) {
-
 			return $http.post(SERVER_URL + 'evaluations', evaluation, config);
 		}
 	};
