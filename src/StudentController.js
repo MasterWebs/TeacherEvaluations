@@ -33,5 +33,10 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 			CourseResource.init($scope.token, course);
 			$location.path('/course/' + course.ID);
 		};
+
+		$scope.evaluation = function (evalu) {
+			console.log(evalu.ID);
+			$location.path('/student-evaluation/' + evalu.ID);
+		};
 	}
 }]);

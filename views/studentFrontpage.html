@@ -8,6 +8,6 @@
 <div class="col-md-4">
 	<h3>Your evaluations</h3>
 	<ul ng-repeat="eval in myEvaluations">
-		<li > {{eval.CourseName}} </li>
+		<li><a ng-click="evaluation(eval)">{{eval.CourseName}}</a></li>
 	</ul>
 </div>
