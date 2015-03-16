@@ -9,7 +9,7 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 	$scope.startDate = { value: new Date() };
 	$scope.endDate = { value: new Date() };
 
-	EvaluationResource.init($scope.token);
+	//EvaluationResource.init($scope.token);
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');

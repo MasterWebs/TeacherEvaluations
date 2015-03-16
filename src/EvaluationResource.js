@@ -2,6 +2,7 @@ angular.module('EvalApp').factory('EvaluationResource',
 ['$http', 'SERVER_URL',
 function ($http, SERVER_URL) {
 	var config = '';
+	var evaluation = {};
 
 	return {
 		init: function (_token) {
@@ -16,6 +17,12 @@ function ($http, SERVER_URL) {
 		},
 		createEvaluation: function (evaluation) {
 			return $http.post(SERVER_URL + 'evaluations', evaluation, config);
+		},
+		setEvaluation: function (_evaluation) {
+			evaluation = _evaluation;
+		},
+		getThisEvaluation: function () {
+			return evaluation;
 		}
 	};
 }]);
