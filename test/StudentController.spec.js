@@ -1,6 +1,6 @@
 describe('StudentController', function () {
 	// this tests the logic of the StudentController
-	var scope, createController;
+	var controller, scope, createController;
 
 	var mockLoginResourceWithToken = {
 		getUser: function () { return 'user'; },
@@ -152,7 +152,7 @@ describe('StudentController', function () {
 
 	describe('when the user is not logged in as student', function () {
 		it('should alert with toastr and redirect user to login', function () {
-			var controller = createController(false, false);
+			controller = createController(false, false);
 			// expect(scope.token).toEqual('');
 			expect(toastr.error).toHaveBeenCalledWith('You are not a student');
 			expect(mockLocation.path).toHaveBeenCalledWith('/login');
@@ -160,26 +160,24 @@ describe('StudentController', function () {
 	});
 
 	describe('when the token is defined', function () {
-
+		beforeEach(function () {
+			controller = createController(true, false);
+		});
 		it('should call init with token if token is defined', function () {
-			var controller = createController(true, false);
 			expect(mockMyResource.init).toHaveBeenCalledWith(scope.token);
 		});
 
 		it('should call courses if token is defined', function () {
-			var controller = createController(true, false);
 			expect(mockMyResource.courses).toHaveBeenCalled();
 			expect(scope.myCourses.length).toEqual(3);
 		});
 
 		it('should call evaluations if token is defined', function () {
-			var controller = createController(true, false);
 			expect(mockMyResource.evaluations).toHaveBeenCalled();
 			expect(scope.myEvaluations.length).toEqual(2);
 		});
 
 		it('should redirect user to correct course, and initialize CourseResource', function () {
-			var controller = createController(true, false);
 			var course = {
 				ID: 1,
 				CourseID: 1,
