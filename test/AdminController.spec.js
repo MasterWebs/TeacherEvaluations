@@ -186,7 +186,7 @@ describe('AdminController', function () {
 		});
 	});
 
-	/* describe('when the token is defined', function () {
+	describe('when the token is defined', function () {
 		beforeEach(function () {
 			controller = createController(true, true);
 		});
@@ -194,8 +194,8 @@ describe('AdminController', function () {
 		it('should initialize EvaluationTemplateResource and EvaluationResource', function () {
 			expect(mockEvaluationTemplateResource.init).toHaveBeenCalled();
 			expect(mockEvaluationResource.init).toHaveBeenCalled();
-			// expect(mockLocation.path).not.toHaveBeenCalledWith('/login');
+			expect(mockLocation.path).not.toHaveBeenCalledWith('/login');
 			expect(controller.role).toEqual('admin');
 		});
-	}); */
+	});
 });

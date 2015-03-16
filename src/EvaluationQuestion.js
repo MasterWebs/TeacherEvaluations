@@ -3,7 +3,7 @@ function () {
 	return {
 		restrict: 'E',
 		scope: {
-			question: 'ngModel'
+			question: '=question'
 		},
 		templateUrl: 'views/evaluationQuestion.tpl.html',
 		link: function (scope, element, attributes) {
