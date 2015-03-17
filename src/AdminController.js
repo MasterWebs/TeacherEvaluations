@@ -25,6 +25,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 		EvaluationTemplateResource.getTemplates()
 		.success(function (response) {
 			$scope.evaluationTemplates = response;
+			console.log(response);
 		})
 		.error(function () {
 			toastr.error("Could not fetch all evaluation templates");
@@ -36,6 +37,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 
 		$scope.getTemplate = function (template) {
 			EvaluationTemplateResource.setTemplate(template);
+			console.log(template);
 			$location.path('/template/' + template.ID);
 		};
 

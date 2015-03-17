@@ -186,7 +186,6 @@ describe('StudentController', function () {
 				NameEN: 'Web Programming'
 			};
 			scope.route(course);
-			expect(mockCourseResource.init).toHaveBeenCalledWith(scope.token, course);
 			expect(mockLocation.path).toHaveBeenCalledWith('/course/1');
 		});
 	});

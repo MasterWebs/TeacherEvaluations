@@ -45,8 +45,8 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	};
 
 	$scope.createTemplate = function () {
-		if ($scope.teacherQuestions.length === 0 || $scope.courseQuestions.length === 0) {
-			toastr.error("You need to add at least one question ");
+		if ($scope.teacherQuestions.length === 0 && $scope.courseQuestions.length === 0) {
+			toastr.error("You need to add at least one question");
 		} else {
 			var templateObj = {
 				ID: 0,
@@ -63,7 +63,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 				toastr.success("Created evaluation template");
 			})
 			.error (function () {
-				toastr.error("Could not create template");
+				toastr.error("Could not create evaluation template");
 			});
 
 			$location.path('/admin');
