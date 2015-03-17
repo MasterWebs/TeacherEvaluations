@@ -23,10 +23,23 @@
 				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image URL" />
 				<span>Type of question
 					<select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"></select>
-				</span>		
+				</span>
+
+				<div ng-show="qType.opt === 'Single' || qType.opt === 'Multiple'">
+					<span>Answers to question</span>
+					<div >
+						<input type="text" class="form-control" ng-repeat="ans in answers" ng-model="ans.answer" placeholder="Answer" />
+					</div>	
+
+					<button class="btn btn-default" ng-click="addAnswer('add')">Add answer</button>
+					<button class="btn btn-default" ng-click="addAnswer('delete')">Remove Answer</button>
+				</div>
+
 				<span>Questions relate to
 					<select class="form-control" ng-model="relate" ng-options="option.to for option in optionRelate"></select> 
 				</span>
+
+				
 			</form>
 		</div>
 		<!-- <button ng-click="createQuestion()">Add</button> -->

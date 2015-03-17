@@ -16,6 +16,7 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.qType = $scope.qTypeOption[0];
 	$scope.optionRelate = [ {to:'Courses'}, {to:'Teachers'}, {to:'Course & Teachers'} ];
 	$scope.relate = $scope.optionRelate[0];
+	$scope.answers = [ {answer: ''} ];
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
@@ -62,16 +63,26 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			toastr.error("Questin text in english cannot be empty");
 		} else {
 			var qObj = {};
+			var cont = true; //should create queastion if answers are filled
 			if($scope.qType.opt === 'Single' || $scope.qType.opt === 'Multiple') {//add answers array
-				console.log('single | multi');
-				qObj = {
-					ID: 0,
-					Text: $scope.qText,
-					TextEN: $scope.qTextEN,
-					ImageURL: $scope.qImageURL,
-					Type: $scope.qType.opt, //single, multiple
-					Answers: []
-				};
+				for(var i = 0; i < $scope.answers.length; i++) {  //checks if an answer field is empty
+					if($scope.answers[i].answer === '') {
+						toastr.error("Answer field cannot be empty");
+						cont = false;
+					}
+				}
+
+				if(cont) {  // should not create question if one answer field is empty
+					
+					qObj = {
+						ID: 0,
+						Text: $scope.qText,
+						TextEN: $scope.qTextEN,
+						ImageURL: $scope.qImageURL,
+						Type: $scope.qType.opt, //single, multiple
+						Answers: $scope.answers
+					};
+				}
 			} else {  // qType = text, no answer array
 				console.log('Text');
 				qObj = {
@@ -83,18 +94,32 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 				};
 			}
 			
-			//ATTENTION - Needd to add for course and teachers!
-			if($scope.relate.to === 'Courses') {	
-				$scope.courseQuestions.push(qObj);
-				toastr.success("Added question to Courses");
-			} else if ($scope.relate.to === 'Teachers') {
-				$scope.teacherQuestions.push(qObj);
-				toastr.success("Added question to teachers");
-			} else { //Course and teachers
-				$scope.courseQuestions.push(qObj);
-				$scope.teacherQuestions.push(qObj);
-				toastr.success("Added question to courses and teachers");
+			if(cont) {
+				//ATTENTION - Needd to add for course and teachers!
+				if($scope.relate.to === 'Courses') {	
+					$scope.courseQuestions.push(qObj);
+					toastr.success("Added question to Courses");
+				} else if ($scope.relate.to === 'Teachers') {
+					$scope.teacherQuestions.push(qObj);
+					toastr.success("Added question to teachers");
+				} else { //Course and teachers
+					$scope.courseQuestions.push(qObj);
+					$scope.teacherQuestions.push(qObj);
+					toastr.success("Added question to courses and teachers");
+				}
 			}
 		}
+	};
+
+	$scope.addAnswer = function (option) {
+		if(option === 'add') {
+			var ans = {
+				answer: ''
+			};
+			$scope.answers.push(ans);
+		} else if (option === 'delete') {
+			$scope.answers.pop();
+		}
+		console.log($scope.answers);
 	};
 }]);
