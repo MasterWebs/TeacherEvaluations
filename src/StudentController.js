@@ -12,6 +12,7 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 		$location.path('/login');
 	} else {
 		MyResource.init($scope.token);  //Initialize token and config in MyResource
+		CourseResource.init($scope.token);
 		
 		MyResource.courses()
 		.success(function (response) {
@@ -29,13 +30,14 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 			toastr.error('Could not fetch your evaluations');
 		});
 
+		//þarf að skoða þennan betur
 		$scope.route = function (course) {
-			CourseResource.init($scope.token, course);
+
 			$location.path('/course/' + course.ID);
 		};
 
 		$scope.evaluation = function (evalu) {
-			console.log(evalu.ID);
+			CourseResource.setEvaluation(evalu);
 			$location.path('/student-evaluation/' + evalu.ID);
 		};
 	}
