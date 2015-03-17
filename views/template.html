@@ -38,7 +38,11 @@
 				<p>Text: {{tq.Text}}</p>
 				<p>TextEN: {{tq.TextEN}}</p>
 				<p>Type: {{tq.Type}}</p>
-				<p>ANSWERSz</p>
+
+				<div ng-show="tq.Type === 'Single'">
+					<p>ANSWERS</p>	
+				</div>
+				
 			</div> <!-- well well sm -->
 		</div> <!-- ng repeat tQuestions -->
 	</div> <!-- col-md-6 -->

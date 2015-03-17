@@ -21,6 +21,7 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 			$scope.template = response;
 			$scope.cQuestions = response.CourseQuestions;
 			$scope.tQuestions = response.TeacherQuestions;
+			console.log($scope.tQuestions);
 		})
 		.error(function () {
 			toastr.error("Could not fetch template");

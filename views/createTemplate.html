@@ -4,10 +4,10 @@
 		<h3>Create Template</h3>
 		<div class="form-group"> 
 			<form ng-submit="createTemplate()">
-				<input type="text" class="form-control" ng-model="title" placeholder="Title in icelandic" />
-				<input type="text" class="form-control" ng-model="titleEN" placeholder="Title in english" />
-				<textarea  class="form-control" ng-model="intro" placeholder="Intro in icelandic"> </textarea>
-				<textarea  class="form-control" ng-model="introEN" placeholder="Intro in english"> </textarea>
+				<input type="text" class="form-control" ng-model="title" placeholder="Title in icelandic" required/>
+				<input type="text" class="form-control" ng-model="titleEN" placeholder="Title in english" required/>
+				<textarea  class="form-control" ng-model="intro" placeholder="Intro in icelandic" required> </textarea>
+				<textarea  class="form-control" ng-model="introEN" placeholder="Intro in english" required> </textarea>
 				<input type="submit" value="Create template"  class="btn btn-default" />
 			</form>
 		</div> <!-- form-group -->
@@ -17,32 +17,40 @@
 		<h3>Questions</h3>
 
 		<div class="form-group">
-			<form>
-				<input type="text" class="form-control" ng-model="qText" placeholder="Question" />
-				<input type="text" class="form-control" ng-model="qTextEN" placeholder="Question in english" />
+			<form ng-submit="createQuestion()">
+				<input type="text" class="form-control" ng-model="qText" placeholder="Question" required/>
+				<input type="text" class="form-control" ng-model="qTextEN" placeholder="Question in english" required/>
 				<input type="text" class="form-control" ng-model="qImageURL" placeholder="Image URL" />
+				
 				<span>Type of question
 					<select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"></select>
 				</span>
 
-				<div ng-show="qType.opt === 'Single' || qType.opt === 'Multiple'">
+				<div ng-show="qType.opt === 'single' || qType.opt === 'multiple'">
 					<span>Answers to question</span>
-					<div >
-						<input type="text" class="form-control" ng-repeat="ans in answers" ng-model="ans.answer" placeholder="Answer" />
+					<div ng-repeat="ans in answers">
+						<input type="text" class="form-control" ng-model="ans.Text"
+						placeholder="Answer in icelandic" ng-required="qType.opt === 'single' || qType.opt === 'multiple'" />
+
+						<input type="text" class="form-control" ng-model="ans.TextEN"
+						placeholder="Answer in english" ng-required="qType.opt === 'single' || qType.opt === 'multiple'" />
+
+						<input type="text" class="form-control" ng-model="ans.ImageURL"
+						placeholder="Image URL" />
+
+						<span>Weight</span><input type="number" ng-model="ans.Weight" min="1" max="5" />
 					</div>	
 
-					<button class="btn btn-default" ng-click="addAnswer('add')">Add answer</button>
-					<button class="btn btn-default" ng-click="addAnswer('delete')">Remove Answer</button>
+					<button type="button" class="btn btn-success glyphicon glyphicon-plus" ng-click="addAnswer('add')"></button>
+					<button type="button" class="btn btn-danger glyphicon glyphicon-minus" ng-click="addAnswer('delete')"></button>
 				</div>
 
 				<span>Questions relate to
 					<select class="form-control" ng-model="relate" ng-options="option.to for option in optionRelate"></select> 
 				</span>
 
-				
+				<input type="submit" class="btn btn-primary" value="Add Question to template" /> 
 			</form>
 		</div>
-		<!-- <button ng-click="createQuestion()">Add</button> -->
-		<button question-template class="btn btn-sm glyphicon glyphicon-plus" ng-click="createQuestion()"></button> <span>Add Question to template</span>
 	</div>
 </div> <!-- row -->
