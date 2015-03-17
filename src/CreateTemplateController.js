@@ -23,6 +23,21 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 		Weight: 1
 	}];
 
+	$scope.resetQuestion = function () {
+		$scope.qText = '';
+		$scope.qTextEN = '';
+		$scope.qImageURL = '';
+		$scope.qTypeOption = [ {opt: 'text'}, {opt: 'single'}, {opt: 'multiple'} ];
+		$scope.qType = $scope.qTypeOption[0];
+		$scope.optionRelate = [ {to:'Courses'}, {to:'Teachers'}, {to:'Course & Teachers'} ];
+		$scope.relate = $scope.optionRelate[0];
+		$scope.answers = [{
+			Text: '',
+			TextEN: '',
+			ImageURL: '',
+			Weight: 1
+		}];
+	};
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
@@ -49,6 +64,8 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			.error (function () {
 				toastr.error("Could not create template");
 			});
+
+			$location.path('/admin');
 		}
 	};
 
@@ -85,6 +102,8 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			$scope.teacherQuestions.push(qObj);
 			toastr.success("Added question to courses and teachers");
 		}
+
+		$scope.resetQuestion();
 	};
 
 	$scope.addAnswer = function (option) {
