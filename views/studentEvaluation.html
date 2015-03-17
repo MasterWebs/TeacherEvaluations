@@ -1,5 +1,5 @@
 <h3>{{courseEvaluation.CourseName}} - {{courseEvaluation.CourseNameEN}} </h3>
-<div>
+<div class="col-md-8">
 	<p>{{evaluation.IntroText}}</p>
 	<p>{{evaluation.IntroTextEN}}</p>
 </div>
@@ -7,7 +7,7 @@
 	<form>
 		<div class="col-md-6">
 			<h4>Questions directed towards the course</h4>
-			<evaluation-question ng-repeat="question in courseQuestions" question="question"> </evaluation-question>
+			<evaluation-question ng-repeat="question in courseQuestions" question="question"></evaluation-question>
 		</div>
 
 		<div classs="col-md-6"> 

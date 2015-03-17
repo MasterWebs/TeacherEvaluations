@@ -14,7 +14,6 @@ function ($scope, LoginResource, $location) {
 			LoginResource.setToken(response.Token);
 			LoginResource.setRole(response.User.Role);
 			toastr.success(response.User.Username + ' logged in!');
-			console.log(response.User.Role);
 			if (response.User.Role === 'student') {
 				$location.path('/student');
 			} else if (response.User.Role === 'admin') {
