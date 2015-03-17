@@ -8,7 +8,7 @@
 
 <div ng-show="question.question.Type === 'single'">
 	<div ng-repeat="answer in question.question.Answers">
-		<input ng-model="question.answer" type="radio" />{{answer.Text}}
+		<input ng-model="question.answer" type="radio" ng-value="answer.ID" />{{answer.Text}} {{answer.ID}}
 	</div>
 </div>
 
