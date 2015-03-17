@@ -148,26 +148,26 @@ describe('AdminController', function () {
  			};
  		});
 
-		spyOn(mockLoginResource, 'getUser');
-		spyOn(mockLoginResource, 'getToken');
-		spyOn(mockLoginResource, 'getRole');
-		spyOn(mockLoginResourceNoToken, 'getUser');
-		spyOn(mockLoginResourceNoToken, 'getToken');
-		spyOn(mockLoginResourceNoToken, 'getRole');
+		spyOn(mockLoginResource, 'getUser').and.callThrough();
+		spyOn(mockLoginResource, 'getToken').and.callThrough();
+		spyOn(mockLoginResource, 'getRole').and.callThrough();
+		spyOn(mockLoginResourceNoToken, 'getUser').and.callThrough();
+		spyOn(mockLoginResourceNoToken, 'getToken').and.callThrough();
+		spyOn(mockLoginResourceNoToken, 'getRole').and.callThrough();
 		spyOn(mockEvaluationTemplateResource, 'init');
 		spyOn(mockEvaluationTemplateResource, 'getTemplates').and.callThrough();
 		spyOn(mockEvaluationTemplateResource, 'getTemplate').and.callThrough();
 		spyOn(mockEvaluationTemplateResource, 'setTemplate');
-		spyOn(mockEvaluationTemplateResourceError, 'init');
+		/* spyOn(mockEvaluationTemplateResourceError, 'init');
 		spyOn(mockEvaluationTemplateResourceError, 'getTemplates').and.callThrough();
 		spyOn(mockEvaluationTemplateResourceError, 'getTemplate').and.callThrough();
-		spyOn(mockEvaluationTemplateResourceError, 'setTemplate');
+		spyOn(mockEvaluationTemplateResourceError, 'setTemplate'); */
 		spyOn(mockEvaluationResource, 'init');
 		spyOn(mockEvaluationResource, 'getEvaluations').and.callThrough();
 		spyOn(mockEvaluationResource, 'setEvaluation');
-		spyOn(mockEvaluationResourceError, 'init');
+		/*spyOn(mockEvaluationResourceError, 'init');
 		spyOn(mockEvaluationResourceError, 'getEvaluations').and.callThrough();
-		spyOn(mockEvaluationResourceError, 'setEvaluation');
+		spyOn(mockEvaluationResourceError, 'setEvaluation'); */
 		spyOn(mockLocation, 'path');
 		spyOn(toastr, 'error');
  	});
@@ -203,8 +203,8 @@ describe('AdminController', function () {
 			expect(mockEvaluationResource.init).toHaveBeenCalled();
 		}); */
 
-		/* it('scope.role should equal admin', function () {
+		it('scope.role should equal admin', function () {
 			expect(scope.role).toEqual('admin');
-		}); */
+		});
 	});
 });
