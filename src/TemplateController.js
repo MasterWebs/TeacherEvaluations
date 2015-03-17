@@ -28,8 +28,6 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 		});
 	}
 	
-	
-
 	$scope.createEvaluation = function () {
 		var evaluation = {
 			TemplateID: $scope.template.ID,
@@ -45,8 +43,6 @@ function ($scope, $location, EvaluationTemplateResource, LoginResource, Evaluati
 		.error(function () {
 			toastr.error("Could not create evaluation");
 		});
-
-
 	};
 
 }]);
