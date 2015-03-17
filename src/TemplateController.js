@@ -3,23 +3,31 @@ angular.module('EvalApp').controller('TemplateController',
 function ($scope, $location, EvaluationTemplateResource, LoginResource, EvaluationResource) {
 	$scope.role = LoginResource.getRole();
 	$scope.token = LoginResource.getToken();
-	$scope.template = EvaluationTemplateResource.getThisTemplate();
-	$scope.cQuestions = $scope.template.CourseQuestions;
-	$scope.tQuestions = $scope.template.TeacherQuestions;
+	$scope.thisTemplate = EvaluationTemplateResource.getThisTemplate();  //only used to get ID
+	$scope.template = {};
+	$scope.cQuestions = {};
+	$scope.tQuestions = {};
 	$scope.startDate = { value: new Date() };
 	$scope.endDate = { value: new Date() };
 
-	//EvaluationResource.init($scope.token);
+	console.log($scope.thisTemplate.ID);
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
+	} else {
+		EvaluationTemplateResource.getTemplate($scope.thisTemplate.ID)
+		.success(function (response) {
+			console.log(response);
+			$scope.template = response;
+			$scope.cQuestions = response.CourseQuestions;
+			$scope.tQuestions = response.TeacherQuestions;
+		})
+		.error(function () {
+			toastr.error("Could not fetch template");
+		});
 	}
 	
-	if ($scope.template === undefined) {
-		toastr.error("undefined template");
-	} else {
-		
-	}
+	
 
 	$scope.createEvaluation = function () {
 		var evaluation = {
