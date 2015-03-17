@@ -3,25 +3,30 @@ angular.module('EvalApp').controller('CreateTemplateController',
 function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 	$scope.token = LoginResource.getToken();
 	$scope.role = LoginResource.getRole();
-	$scope.title = '';
-	$scope.titleEN = '';
-	$scope.intro = '';
-	$scope.introEN = '';
-	$scope.courseQuestions = [];
-	$scope.teacherQuestions = [];
-	$scope.qText = '';
-	$scope.qTextEN = '';
-	$scope.qImageURL = '';
-	$scope.qTypeOption = [ {opt: 'text'}, {opt: 'single'}, {opt: 'multiple'} ];
-	$scope.qType = $scope.qTypeOption[0];
-	$scope.optionRelate = [ {to:'Courses'}, {to:'Teachers'}, {to:'Course & Teachers'} ];
-	$scope.relate = $scope.optionRelate[0];
-	$scope.answers = [{
-		Text: '',
-		TextEN: '',
-		ImageURL: '',
-		Weight: 1
-	}];
+
+	if ($scope.role !== 'admin') {
+		$location.path('/login');
+	} else {
+		$scope.title = '';
+		$scope.titleEN = '';
+		$scope.intro = '';
+		$scope.introEN = '';
+		$scope.courseQuestions = [];
+		$scope.teacherQuestions = [];
+		$scope.qText = '';
+		$scope.qTextEN = '';
+		$scope.qImageURL = '';
+		$scope.qTypeOption = [ {opt: 'text'}, {opt: 'single'}, {opt: 'multiple'} ];
+		$scope.qType = $scope.qTypeOption[0];
+		$scope.optionRelate = [ {to:'Courses'}, {to:'Teachers'}, {to:'Course & Teachers'} ];
+		$scope.relate = $scope.optionRelate[0];
+		$scope.answers = [{
+			Text: '',
+			TextEN: '',
+			ImageURL: '',
+			Weight: 1
+		}];
+	}
 
 	$scope.resetQuestion = function () {
 		$scope.qText = '';
@@ -38,10 +43,6 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource) {
 			Weight: 1
 		}];
 	};
-
-	if ($scope.role !== 'admin') {
-		$location.path('/login');
-	}
 
 	$scope.createTemplate = function () {
 		if ($scope.teacherQuestions.length === 0 || $scope.courseQuestions.length === 0) {
