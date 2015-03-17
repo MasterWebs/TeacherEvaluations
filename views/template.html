@@ -18,6 +18,7 @@
 		<p>{{template.IntroTextEN}}</p>
 	</div>
 </div>
+
 <div class="row" ng-model="template">
 	<div  class="col-md-6">
 		<h3>Course Questions</h3>
@@ -26,7 +27,17 @@
 				<p>Text: {{cq.Text}}</p>
 				<p>TextEN: {{cq.TextEN}}</p>
 				<p>Type: {{cq.Type}}</p>
-				<p>ANSWERS</p>
+				
+				<div ng-show="cq.Type === 'single' || cq.Type === 'multiple'">
+					<p>Answers to question</p>
+					<div ng-repeat="ans in cq.Answers">
+						<hr>
+						<p>Text: {{ans.Text}}</p>
+						<p>TextEN: {{ans.TextEN}}</p>
+						<p>ImageURL: {{ans.ImageURL}}</p>
+						<p>Weight: {{ans.Weight}}</p>
+					</div>
+				</div> <!-- repeat ans in cq -->
 			</div> <!-- well well sm -->
 		</div> <!-- ng repeat cQuestions -->
 	</div> <!-- col-md-6 -->
@@ -39,9 +50,16 @@
 				<p>TextEN: {{tq.TextEN}}</p>
 				<p>Type: {{tq.Type}}</p>
 
-				<div ng-show="tq.Type === 'Single'">
-					<p>ANSWERS</p>	
-				</div>
+				<div ng-show="tq.Type === 'single' || tq.Type === 'multiple'">
+					<p>Answers to question</p>
+					<div ng-repeat="ans in tq.Answers">
+						<hr>
+						<p>Text: {{ans.Text}}</p>
+						<p>TextEN: {{ans.TextEN}}</p>
+						<p>ImageURL: {{ans.ImageURL}}</p>
+						<p>Weight: {{ans.Weight}}</p>
+					</div>
+				</div> <!-- repeat ans in tq -->
 				
 			</div> <!-- well well sm -->
 		</div> <!-- ng repeat tQuestions -->
