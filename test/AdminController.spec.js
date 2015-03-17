@@ -181,6 +181,7 @@ describe('AdminController', function () {
 			expect(mockLoginResourceNoToken.getUser).toHaveBeenCalled();
 			expect(mockLoginResourceNoToken.getToken).toHaveBeenCalled();
 			expect(mockLoginResourceNoToken.getRole).toHaveBeenCalled();
+			expect(scope.role).toEqual('');
 		});
 
 		it('should initialize EvaluationTemplateResource and EvaluationResource', function () {
@@ -193,18 +194,61 @@ describe('AdminController', function () {
 		});
 	});
 
-	describe('when the token is defined', function () {
+	describe('when the token is defined and server returns success', function () {
 		beforeEach(function () {
 			controller = createController(true, false);
 		});
 
-		/* it('should call init in EvaluationTemplateResource and EvaluationResource', function () {
+		it('should call init in EvaluationTemplateResource and EvaluationResource', function () {
 			expect(mockEvaluationTemplateResource.init).toHaveBeenCalled();
 			expect(mockEvaluationResource.init).toHaveBeenCalled();
-		}); */
+		});
 
-		it('scope.role should equal admin', function () {
-			expect(scope.role).toEqual('admin');
+		it('should call getEvaluations and getTemplates in their respective resources', function () {
+			expect(mockEvaluationTemplateResource.getTemplates).toHaveBeenCalled();
+			expect(mockEvaluationResource.getEvaluations).toHaveBeenCalled();
+		});
+
+		it('should redirect user to create when redirect(create) is called', function () {
+			scope.createTemplate();
+			expect(mockLocation.path).toHaveBeenCalledWith('/create-template');
+		});
+
+		it('should change template in EvaluationTemplateResource when getTemplate is called and redirect', function () {
+			var template = {
+				ID: 1,
+				Title: 'Sniðmát',
+				TitleEN: 'Template',
+				IntroText: 'Þetta er sniðmát',
+				IntroTextEN: 'This is a template',
+				CourseQuestions: [],
+				TeacherQuestions: []
+			};
+			scope.getTemplate(template);
+			expect(mockEvaluationTemplateResource.setTemplate).toHaveBeenCalledWith(template);
+			expect(mockLocation.path).toHaveBeenCalledWith('/template/1');
+		});
+
+		it('should change evaluation in EvaluationResource when getEvaluation is called and redirect', function () {
+			var evaluation = {
+				ID: 1,
+				TemplateTitle: 'Könnun',
+				TemplateTitleEN: 'Survey'
+			};
+			scope.getEvaluation(evaluation);
+			expect(mockEvaluationResource.setEvaluation).toHaveBeenCalledWith(evaluation);
+			expect(mockLocation.path).toHaveBeenCalledWith('evaluation/1');
+		});
+	});
+
+	describe('when server returns error', function () {
+		beforeEach(function () {
+			controller = createController(true, true);
+		});
+
+		it('should alert that evaluations and templates could not be fetched', function () {
+			expect(toastr.error).toHaveBeenCalledWith('Could not fetch evaluations');
+			expect(toastr.error).toHaveBeenCalledWith('Could not fetch all evaluation templates');
 		});
 	});
 });

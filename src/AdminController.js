@@ -30,30 +30,18 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 			toastr.error("Could not fetch all evaluation templates");
 		});
 
-		$scope.redirect = function (route) {
-			if (route === 'create') {
-				$location.path('/create-template');
-			} else if (route === 'evaluation') {
-				$location.path('create-evaluation');
-			}
+		$scope.createTemplate = function () {
+			$location.path('/create-template');
 		};
 
 		$scope.getTemplate = function (template) {
-			EvaluationTemplateResource.getTemplate(template.ID)
-			.success(function (response) {
-				EvaluationTemplateResource.setTemplate(response);
-				$location.path('/template/' + response.ID);
-
-			})
-			.error(function () {
-				toastr.error("Could not fetch template");
-			});
+			EvaluationTemplateResource.setTemplate(template);
+			$location.path('/template/' + template.ID);
 		};
 
 		$scope.getEvaluation = function (evaluation) {
 			EvaluationResource.setEvaluation(evaluation);
 			$location.path('evaluation/' + evaluation.ID);
 		};
-
 	}
 }]);
