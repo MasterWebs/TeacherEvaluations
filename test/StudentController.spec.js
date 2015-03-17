@@ -162,8 +162,9 @@ describe('StudentController', function () {
 		beforeEach(function () {
 			controller = createController(true, false);
 		});
-		
+
 		it('should call init with token if token is defined', function () {
+			expect(scope.role).toEqual('student');
 			expect(mockMyResource.init).toHaveBeenCalledWith(scope.token);
 		});
 

@@ -15,12 +15,17 @@ describe('CourseResource', function () {
 		TitleEN: 'Evaluation'
 	};
 
+	beforeEach(function () {
+		module('EvalApp');
+
+		inject(function ($injector) {
+			factory = $injector.get('CourseResource');
+		});
+	});
+
 	describe('Server functions', function () {
 		beforeEach(function () {
-			module('EvalApp');
-
 			inject(function ($injector) {
-				factory = $injector.get('CourseResource');
 				$httpBackend = $injector.get('$httpBackend');
 			});
 		});
