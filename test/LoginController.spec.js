@@ -32,7 +32,7 @@ describe('LoginController', function () {
 					}
 					return {
 						error: function (errorFn) {
-							if (user !== 'snaebjorn13' && pass === '123456') {
+							if (user === 'hacker') {
 								errorFn();
 							}
 						}
@@ -74,30 +74,6 @@ describe('LoginController', function () {
 				  $location:     mockLocation  });
 		});
 
-		it('should reject login when username is empty', function () {
-			$scope.user = '';
-			$scope.pass = '123456';
-			$scope.login();
-			expect(mockLoginResource.login).not.toHaveBeenCalled();
-			expect(toastr.error).toHaveBeenCalled();
-		});
-
-		it('should reject login when password is empty', function () {
-			$scope.user = 'snaebjorn13';
-			$scope.pass = '';
-			$scope.login();
-			expect(mockLoginResource.login).not.toHaveBeenCalled();
-			expect(toastr.error).toHaveBeenCalled();
-		});
-
-		it('should reject login when both password and username are empty', function () {
-			$scope.user = '';
-			$scope.pass = '';
-			$scope.login();
-			expect(mockLoginResource.login).not.toHaveBeenCalled();
-			expect(toastr.error).toHaveBeenCalled();
-		});
-
 		it('it should redirect student to student front page, when he logs in', function () {
 			$scope.user = 'snaebjorn13';
 			$scope.pass = '123456';
@@ -120,6 +96,13 @@ describe('LoginController', function () {
 			expect(mockLoginResource.setRole).toHaveBeenCalledWith('admin');
 			expect(toastr.success).toHaveBeenCalled();
 			expect(mockLocation.path).toHaveBeenCalledWith('/admin');
+		});
+
+		it('should alert a user which does not exist', function () {
+			$scope.user = 'hacker';
+			$scope.pass = 'invalidpassword';
+			$scope.login();
+			expect(toastr.error).toHaveBeenCalledWith('Bad username or password!', 'Login error');
 		});
 	});
 });
