@@ -7,6 +7,7 @@ function ($scope, $location, LoginResource, CourseResource) {
 	$scope.evaluation = {};	
 	$scope.courseQuestions = {};
 	$scope.teacherQuestions = {};
+	$scope.answers = [];
 	//SEMESTER
 	
 	if($scope.role !== 'student') {
@@ -18,11 +19,12 @@ function ($scope, $location, LoginResource, CourseResource) {
 			$scope.evaluation = response;
 			$scope.courseQuestions = response.CourseQuestions;
 			$scope.teacherQuestions = response.TeacherQuestions;
-			console.log($scope.teacherQuestions);
+			console.log($scope.evaluation);
 		})
 		.error(function () {
 			toastr.error('Could not fetch evaluation');
 		});
 
 	}
+
 }]);

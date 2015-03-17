@@ -1,20 +1,21 @@
 <div>
 	{{question.Text}}
 </div>
+	
 
 <div ng-show="question.Type === 'text'">
 	<textarea ng-model="question.Answer"></textarea>
 </div>
 
 <div ng-show="question.Type === 'single'">
-	<form ng-submit="submit(question)">
-		<div ng-repeat="answer in question.Answers">
-			<input type="radio" value="answer.Text" />Answer.Text
-		</input>
-		<input type="submit" />
-	</form>
+	<div ng-repeat="answer in question.Answers">
+		<input type="radio" />{{answer.Text}}
+	</div>
 </div>
 
 <div ng-show="question.Type === 'multiple'">
-
+	<div ng-repeat="answer in question.Answers">
+		<input type="radio" /> {{answer.Text}}
+	</div>
 </div>
+

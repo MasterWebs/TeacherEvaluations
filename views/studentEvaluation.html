@@ -4,13 +4,15 @@
 	<p>{{evaluation.IntroTextEN}}</p>
 </div>
 <div class="row">
-	<div class="col-md-6">
-		<h4>Questions directed towards the course</h4>
-		<evaluation-question ng-repeat="question in courseQuestions" question="question"> </evaluation-question>
-	</div>
+	<form>
+		<div class="col-md-6">
+			<h4>Questions directed towards the course</h4>
+			<evaluation-question ng-repeat="question in courseQuestions" question="question"> </evaluation-question>
+		</div>
 
-	<div classs="col-md-6"> 
-		<h4>Questions directed towards the teachers</h4>
-		<evaluation-question ng-repeat="question in teacherQuestions" question="question"> </evaluation-question>
-	</div>
+		<div classs="col-md-6"> 
+			<h4>Questions directed towards the teachers</h4>
+			<evaluation-question ng-repeat="question in teacherQuestions" question="question"> </evaluation-question>
+		</div>
+	</form>
 </div>
