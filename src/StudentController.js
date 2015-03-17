@@ -1,5 +1,5 @@
 angular.module('EvalApp').controller('StudentController',
-['$scope', '$location','LoginResource', 'MyResource', 'CourseResource',
+['$scope', '$location', 'LoginResource', 'MyResource', 'CourseResource',
 function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 	$scope.role = LoginResource.getRole();
 	$scope.token = LoginResource.getToken();
