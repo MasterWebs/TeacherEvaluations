@@ -8,7 +8,8 @@
 	<span>Course</span>
 	<select class="form-control" ng-model="course" ng-options="course.Name for course in courseOption" 
 		ng-change="updateCourse(course)"></select>
-	<span>Question type</span><select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"></select>
+	<span>Question type</span><select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"
+		ng-change="updateType()"></select>
 	<span>Question</span><select class="form-control" ng-model="question" ng-options="question.Text for question in questionOption"></select>
 	<ul>
 		<li ng-repeat="course in courses"><a ng-click="getResult(course)"> {{course.Name}} - {{course.NameEN}} - {{course.Semester}}</a></li>

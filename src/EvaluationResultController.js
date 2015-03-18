@@ -50,34 +50,13 @@ function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 		$location.path('/login');
 	}
 
-
-	/*$scope.getQuestion = function (q) {
-		console.log(q);
-		console.log(q.Type);
-		if(q.Type === 'single') {
-			angular.forEach(q.OptionResults, function (obj) {
-				var opResult = {
-					Answer: obj.Answer,
-					AnswerText: obj.AnswerText,
-					AnswerTextEN: obj.AnswerTextEN,
-					Weight: obj.Weight,
-					Count: obj.Count
-				};
-				
-				$scope.optionsResults.push(opResult);
-			});	
-		} else {  //text question
-
-		}
-
-		console.log($scope.optionsResults);
-		
-	};*/
-
 	$scope.updateCourse = function (c) {
-		//console.log(c);
+		//remove prevous data
+		$scope.questionOption = [];  
+		$scope.labels = [];
+		$scope.data = [];
 
-		//if($scope.qType.opt === 'single') {
+		if($scope.qType.opt === 'single') {
 			angular.forEach(c.Questions, function (obj) {
 				var question = {};
 					if(obj.Type === 'single') {
@@ -103,17 +82,13 @@ function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 			});
 
 
-		/*} else {	//text
+		} else {	//text
 			console.log('text');
-		}*/
+		}
 
 	};
 
 	$scope.updateType = function () {
-		if($scope.qType = $scope.qTypeOption[0]) {
-			$scope.qType = $scope.qTypeOption[1]; 
-		} else {
-			$scope.qType = $scope.qTypeOption[0]; 
-		}
+		$scope.updateCourse($scope.course);
 	};
 }]);
