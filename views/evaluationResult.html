@@ -5,27 +5,34 @@
 
 <div class="col-md-4">
 	<h4>See evaluation result for</h4>
+	
 	<span>Course</span>
 	<select class="form-control" ng-model="course" ng-options="course.Name for course in courseOption" 
 		ng-change="updateCourse(course)"></select>
-	<span>Question type</span><select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"
+
+	<span>Question type</span>
+	<select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"
 		ng-change="updateType()"></select>
-	<span>Question</span><select class="form-control" ng-model="question" ng-options="question.Text for question in questionOption"></select>
-	<ul>
-		<li ng-repeat="course in courses"><a ng-click="getResult(course)"> {{course.Name}} - {{course.NameEN}} - {{course.Semester}}</a></li>
-		<li ng-if="courses.length === 0">None</li>
-	</ul>
+
+	<span ng-if="qType.opt === 'single'">Question</span>
+	<select class="form-control" ng-model="question" ng-options="question.Text for question in questionOption" 
+		ng-if="qType.opt === 'single'"></select>
+
+	<span ng-if="qType.opt === 'text'">Question</span>
+	<select class="form-control" ng-model="textQuestion" ng-options="question.Text for question in questionText" 
+		ng-if="qType.opt === 'text'"></select>
+
 </div>
 
-<div class="col-md-6">
-	<p>Chart</p>
-	<canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels"></canvas> 
-
-	<ul>
-		<li ng-repeat="q in questions"><a ng-click="getQuestion(q)">{{q.Text}} - {{q.TextEN}} - {{q.Type}}</a></li>
-	</ul>
+<div class="col-md-6" ng-if="qType.opt === 'single'">
+	<canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels" legend="true"></canvas> 
 </div>
 
-<div class="col-md-8">
-		
+<div class="col-md-6" ng-if="qType.opt === 'text'">
+	<h4>Answers</h4>
+ 	<div ng-repeat="ans in textAnswer track by $index">
+ 		<div class="well well-sm">
+ 			<p>{{ans}}</p>
+ 		</div>
+ 	</div>
 </div>

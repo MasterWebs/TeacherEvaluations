@@ -3,7 +3,6 @@ angular.module('EvalApp').controller('EvaluationResultController',
 function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 	$scope.role = LoginResource.getRole();
 	$scope.evalResult = {};
-
 	$scope.qTypeOption = [ {opt: 'text'}, {opt: 'single'} ];
 	$scope.qType = $scope.qTypeOption[0];
 	$scope.courseOption = [];
@@ -11,20 +10,14 @@ function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 	$scope.questionOption = [];
 	$scope.question = $scope.questionOption[0]; 
 	$scope.OptionResults = [];
-
-
+	$scope.questionText = [];
+	$scope.textQuestion = $scope.questionText[0];
+	$scope.textAnswer = [];
 	$scope.labels = []; 
 	$scope.data = [];
 
-
-  	$scope.onClick = function (points, evt) {
-    	console.log(points, evt);
-  	};
-
-
 	if ($scope.role === 'admin') {
 		$scope.thisEvaluation = EvaluationResource.getThisEvaluation();
-		//console.log($scope.thisEvaluation);
 
 		EvaluationResource.getEvaluation($scope.thisEvaluation.ID)
 		.success(function (response) {
@@ -38,7 +31,6 @@ function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 					Questions: obj.Questions
 				};
 				$scope.courseOption.push(course);
-				//$scope.course = $scope.courseOption[0];
 			});
 		})
 		.error(function () {
@@ -52,43 +44,48 @@ function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 
 	$scope.updateCourse = function (c) {
 		//remove prevous data
-		$scope.questionOption = [];  
+		$scope.questionOption = []; 
+		$scope.questionText = []; 
+		$scope.textAnswer = [];
 		$scope.labels = [];
 		$scope.data = [];
 
+		angular.forEach(c.Questions, function (obj) {
+			var question = {
+				QuestionID: obj.QuestionID,
+				Text: obj.Text,
+				TextEN: obj.TextEN,
+				TeacherSSN: obj.TeacherSSN,
+				Type: obj.Type,
+				TextResults: obj.TextResults,
+				OptionResults: obj.OptionsResults
+			};
+				if(obj.Type === 'single') {
+					$scope.questionOption.push(question);
+				} else {
+					$scope.questionText.push(question);
+				}
+		});
+
 		if($scope.qType.opt === 'single') {
-			angular.forEach(c.Questions, function (obj) {
-				var question = {};
-					if(obj.Type === 'single') {
-						console.log("in");
-						question = {
-							QuestionID: obj.QuestionID,
-							Text: obj.Text,
-							TextEN: obj.TextEN,
-							TeacherSSN: obj.TeacherSSN,
-							Type: obj.Type,
-							TextResults: obj.TextResults,
-							OptionResults: obj.OptionsResults
-						};
-						$scope.questionOption.push(question);
-					}
-			});
-
 			$scope.question = $scope.questionOption[0];
-
 			angular.forEach($scope.question.OptionResults, function (obj) {
 				$scope.labels.push(obj.AnswerText);
 				$scope.data.push(obj.Count);
 			});
-
-
 		} else {	//text
-			console.log('text');
+			$scope.textQuestion = $scope.questionText[0];
+			angular.forEach($scope.textQuestion.TextResults, function (obj) {
+				$scope.textAnswer.push(obj);
+			});
 		}
-
 	};
 
 	$scope.updateType = function () {
 		$scope.updateCourse($scope.course);
 	};
+
+	$scope.onClick = function (points, evt) {
+    	console.log(points, evt);
+  	};
 }]);
