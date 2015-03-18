@@ -79,13 +79,18 @@ describe('AdminController', function () {
 		setTemplate: function (template) { }
  	};
 
+ 	var evaluations = [
+ 		{ ID: 1, Status: 'new' },
+ 		{ ID: 2, Status: 'open' },
+ 		{ ID: 3, Status: 'closed' }
+ 	];
+
  	var mockEvaluationResource = {
  		init: function (token) { },
  		getEvaluations: function () {
  			return {
  				success: function (fn) {
- 					var response = [];
- 					fn(response);
+ 					fn(evaluations);
  					return {
  						error: function (errorFn) {
 
@@ -237,6 +242,18 @@ describe('AdminController', function () {
 			};
 			scope.getEvaluation(evaluation);
 			expect(mockEvaluationResource.setEvaluation).toHaveBeenCalledWith(evaluation);
+			expect(mockLocation.path).toHaveBeenCalledWith('evaluation/1');
+		});
+
+		it('should add evaluations to their respective arrays', function () {
+			expect(scope.openEvaluations).toEqual([{ ID: 2, Status: 'open' }]);
+			expect(scope.closedEvaluations).toEqual([{ ID: 3, Status: 'closed' }]);
+			expect(scope.newEvaluations).toEqual([{ ID: 1, Status: 'new' }]);
+		});
+
+		it('should redirect admin to evaluations result page when evalResult is called', function () {
+			scope.evalResult({ ID: 1 });
+			expect(mockEvaluationResource.setEvaluation).toHaveBeenCalledWith({ ID: 1 });
 			expect(mockLocation.path).toHaveBeenCalledWith('evaluation/1');
 		});
 	});
