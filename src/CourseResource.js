@@ -16,8 +16,8 @@ function ($http, SERVER_URL) {
 		getEvaluation: function (course, semester, evalID) {
 			return $http.get(SERVER_URL + 'courses/' + course + '/' + semester + '/evaluations/' + evalID, config);
 		},
-		saveEvaluation: function (course, semester, evalID, evaluation) {
-			return $http.post(SERVER_URL + 'courses/' + course + '/' + semester + '/evaluations/' + evalID, config, evaluation);
+		saveAnswers: function (course, semester, evalID, answers) {
+			return $http.post(SERVER_URL + 'courses/' + course + '/' + semester + '/evaluations/' + evalID, answers, config);
 		},
 		getThisCourse: function () {
 			return course;

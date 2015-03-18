@@ -55,11 +55,11 @@ describe('CourseResource', function () {
 
 		it('should post an evaluation to the server when saveEvaluation is called', function () {
 			factory.init('t0k3n', course);
-			factory.saveEvaluation('Vefforritun', 1, 1, evaluation);
-			$httpBackend.expectPOST(SERVER_URL + 'courses/Vefforritun/1/evaluations/1',
-			{ 'headers': {'Authorization': 'Basic t0k3n'}},
-			{ 'Accept': 'application/json, text/plain, */*',
-		      'Content-Type': 'application/json;charset=utf-8'}, evaluation)
+			factory.saveAnswers('Vefforritun', 1, 1, evaluation);
+			$httpBackend.expectPOST(SERVER_URL + 'courses/Vefforritun/1/evaluations/1', evaluation,
+			{ 'Authorization': 'Basic t0k3n',
+			  'Accept': 'application/json, text/plain, */*',
+		      'Content-Type': 'application/json;charset=utf-8'})
 			.respond(200);
 		});
 	});
@@ -81,5 +81,19 @@ describe('CourseResource', function () {
 		factory.setThisCourse(newCourse);
 		var result = factory.getThisCourse();
 		expect(result).toEqual(newCourse);
+	});
+
+	it('should return correct evaluation after it is changed', function () {
+		factory.init('t0k3n', course);
+		var evaluation = {
+			ID: 1,
+			TemplateID: 1,
+			CourseID: 'WEPO',
+			CourseName: 'Vefforritun'
+		};
+
+		factory.setEvaluation(evaluation);
+		var result = factory.getThisEvaluation();
+		expect(result).toEqual(evaluation);
 	});
 });
