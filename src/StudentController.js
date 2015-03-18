@@ -4,7 +4,6 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 	$scope.role = LoginResource.getRole();
 	$scope.token = LoginResource.getToken();
 	$scope.user = LoginResource.getUser();
-	$scope.currentUser = LoginResource.getUser();
 	$scope.myCourses = [];
 	$scope.myEvaluations = [];
 	console.log($scope.user);
