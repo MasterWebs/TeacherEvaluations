@@ -86,7 +86,7 @@ describe('EvaluationResultController', function () {
 
 	var mockLocation = {
 		path: function (location) { }
-	}
+	};
 
 	beforeEach(function () {
 		module('EvalApp');
