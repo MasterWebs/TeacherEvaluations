@@ -3,15 +3,16 @@
 	<p>{{evaluation.IntroText}}</p>
 	<p>{{evaluation.IntroTextEN}}</p>
 </div>
-<div class="col-md-8">
+<div>
 	<form ng-submit="submitEvaluation()">
 		<div class="row">
+
 			<div class="col-md-6" ng-if="courseQuestions.length !== 0">
 				<h4>Questions directed towards the course</h4>
 				<evaluation-question ng-repeat="question in courseQuestions" question="question" required></evaluation-question>
 			</div>
 
-			<div classs="col-md-6" ng-if="teacherQuestions.length !== 0"> 
+			<div class="col-md-6" ng-if="teacherQuestions.length !== 0"> 
 				<h4>Questions directed towards the teachers</h4>
 				<evaluation-question ng-repeat="question in teacherQuestions" question="question" required> </evaluation-question>
 			</div>
