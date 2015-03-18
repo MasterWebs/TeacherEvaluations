@@ -8,12 +8,12 @@
 
 <div ng-show="question.question.Type === 'single'">
 	<div ng-repeat="answer in question.question.Answers">
-		<input ng-model="question.answer" type="radio" ng-value="answer.ID" />{{answer.Text}} {{answer.ID}}
+		<input ng-model="question.answer" type="radio" ng-value="answer.ID"/>{{answer.Text}} {{answer.ID}}
 	</div>
 </div>
 
 <div ng-show="question.question.Type === 'multiple'">
 	<div ng-repeat="answer in question.question.Answers">
-		<input type="radio" /> {{answer.Text}}
+		<input type="checkbox" ng-model="question.answer.answer.ID" /> {{answer.Text}}
 	</div>
 </div>

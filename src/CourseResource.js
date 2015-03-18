@@ -17,7 +17,7 @@ function ($http, SERVER_URL) {
 			return $http.get(SERVER_URL + 'courses/' + course + '/' + semester + '/evaluations/' + evalID, config);
 		},
 		saveAnswers: function (course, semester, evalID, answers) {
-			return $http.post(SERVER_URL + 'courses/' + course + '/' + semester + '/evaluations/' + evalID, config, answers);
+			return $http.post(SERVER_URL + 'courses/' + course + '/' + semester + '/evaluations/' + evalID, answers, config);
 		},
 		getThisCourse: function () {
 			return course;
