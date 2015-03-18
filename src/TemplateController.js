@@ -3,25 +3,21 @@ angular.module('EvalApp').controller('TemplateController',
 function ($scope, $location, EvaluationTemplateResource, LoginResource, EvaluationResource) {
 	$scope.role = LoginResource.getRole();
 	$scope.token = LoginResource.getToken();
-	$scope.thisTemplate = EvaluationTemplateResource.getThisTemplate();  //only used to get ID
 	$scope.template = {};
-	$scope.cQuestions = {};
-	$scope.tQuestions = {};
+	$scope.cQuestions = [];
+	$scope.tQuestions = [];
 	$scope.startDate = { value: new Date() };
 	$scope.endDate = { value: new Date() };
-
-	console.log($scope.thisTemplate.ID);
 
 	if ($scope.role !== 'admin') {
 		$location.path('/login');
 	} else {
+		$scope.thisTemplate = EvaluationTemplateResource.getThisTemplate();  //only used to get ID
 		EvaluationTemplateResource.getTemplate($scope.thisTemplate.ID)
 		.success(function (response) {
-			console.log(response);
 			$scope.template = response;
 			$scope.cQuestions = response.CourseQuestions;
 			$scope.tQuestions = response.TeacherQuestions;
-			console.log($scope.tQuestions);
 		})
 		.error(function () {
 			toastr.error("Could not fetch template");

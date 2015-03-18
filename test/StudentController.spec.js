@@ -103,7 +103,8 @@ describe('StudentController', function () {
 	};
 
 	var mockCourseResource = {
-		init: function (token, course) { }
+		init: function (token, course) { },
+		setEvaluation: function (evalu) { }
 	};
 
 	beforeEach(function () {
@@ -146,6 +147,7 @@ describe('StudentController', function () {
 		spyOn(mockMyResource, 'courses').and.callThrough();
 		spyOn(mockMyResource, 'evaluations').and.callThrough();
 		spyOn(mockCourseResource, 'init');
+		spyOn(mockCourseResource, 'setEvaluation');
 		spyOn(toastr, 'error');
 		spyOn(toastr, 'success');
 	});
@@ -178,7 +180,7 @@ describe('StudentController', function () {
 			expect(scope.myEvaluations.length).toEqual(2);
 		});
 
-		it('should redirect user to correct course, and initialize CourseResource', function () {
+		it('should redirect user to correct course', function () {
 			var course = {
 				ID: 1,
 				CourseID: 1,
@@ -187,6 +189,19 @@ describe('StudentController', function () {
 			};
 			scope.route(course);
 			expect(mockLocation.path).toHaveBeenCalledWith('/course/1');
+		});
+
+		it('should redirect user to correct evaluation and set evaluation in CourseResource', function () {
+			var evalu = {
+				ID: 1,
+				CourseID: 1,
+				CourseName: 'WEPO',
+				Questions: []
+			};
+
+			scope.evaluation(evalu);
+			expect(mockCourseResource.setEvaluation).toHaveBeenCalledWith(evalu);
+			expect(mockLocation.path).toHaveBeenCalledWith('/student-evaluation/1');
 		});
 	});
 
