@@ -2,6 +2,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-karma');
 
 	var taskConfig = {
 		concat: {
@@ -51,6 +52,13 @@ module.exports = function (grunt) {
 					describe: 	false,
 					inject: 	false
 				} 
+			}
+		},
+		karma: {
+			unit: {
+				configFile: 'karma.conf.js',
+				backGround: true,
+				singleRun: true
 			}
 		}
 	};
