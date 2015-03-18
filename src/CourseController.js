@@ -9,7 +9,7 @@ function ($scope, $location, CourseResource, LoginResource) {
 		toastr.error('You are not a student');
 		$location.path('/login');
 	} else {
-		$scope.course = CourseResource.getCurrentCourse();
+		$scope.course = CourseResource.getThisCourse();
 		CourseResource.getTeachers($scope.course.CourseID, $scope.semester)
 		.success(function (response) {
 			$scope.teachers = response;
