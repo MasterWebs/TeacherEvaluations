@@ -6,9 +6,27 @@
 			<!-- <li><a ng-click="redirect('getOne')">Get specific evaluation template</a></li>-->
 		</ul>
 
-		<h3>Evaluations</h3>
+		<!-- <h3>Evaluations</h3>
 		<ul >
-			<li ng-repeat="eval in evaluations"><a ng-click="getEvaluation(eval)">{{eval.TemplateTitle}}</a></li>
+			<li ng-repeat="eval in evaluations"><a ng-click="getEvaluation(eval)">{{eval.TemplateTitle}} - {{eval.Status}}</a></li>
+		</ul> -->
+
+		<h4>New Evaluations</h4>
+		<ul>
+			<li ng-repeat="eval in newEvaluations">{{eval.TemplateTitle}} - {{eval.Status}}</li>
+			<p ng-if="newEvaluations.length === 0">None</p>
+		</ul>
+
+		<h4>Open Evaluations</h4>
+		<ul>
+			<li ng-repeat="eval in openEvaluations">{{eval.TemplateTitle}} - {{eval.Status}}</li>
+			<p ng-if="openEvaluations.length === 0">None</p>
+		</ul>
+
+		<h4>Closed Evaluations</h4>
+		<ul>
+			<li ng-repeat="eval in closedEvaluations">{{eval.TemplateTitle}} - {{eval.Status}}</li>
+			<p ng-if="closedEvaluations.length === 0">None</p>
 		</ul>
 	</div> <!-- col-md-4 -->
 

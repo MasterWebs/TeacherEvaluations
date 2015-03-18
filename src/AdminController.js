@@ -6,6 +6,9 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 	$scope.role = LoginResource.getRole();
 	$scope.evaluationTemplates = [];
 	$scope.evaluations = [];
+	$scope.openEvaluations = [];
+	$scope.closedEvaluations = [];
+	$scope.newEvaluations = [];
 	
 	if($scope.role !== 'admin') {
 		$location.path('/login');
@@ -17,6 +20,16 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 		EvaluationResource.getEvaluations()
 		.success(function (response) {
 			$scope.evaluations = response;
+
+			angular.forEach(response, function(obj) {
+				if(obj.Status === 'open') {
+					$scope.openEvaluations.push(obj);
+				} else if (obj.Status === 'closed') {
+					$scope.closedEvaluations.push(obj);
+				} else {  //new
+					$scope.newEvaluations.push(obj);
+				}
+			});
 		})
 		.error( function () {
 			toastr.error("Could not fetch evaluations");
@@ -25,7 +38,6 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 		EvaluationTemplateResource.getTemplates()
 		.success(function (response) {
 			$scope.evaluationTemplates = response;
-			console.log(response);
 		})
 		.error(function () {
 			toastr.error("Could not fetch all evaluation templates");
@@ -37,7 +49,6 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 
 		$scope.getTemplate = function (template) {
 			EvaluationTemplateResource.setTemplate(template);
-			console.log(template);
 			$location.path('/template/' + template.ID);
 		};
 
