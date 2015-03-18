@@ -10,7 +10,7 @@ describe('CourseController', function () {
 	};
 
 	var mockCourseResource = {
-		getCurrentCourse: function () {
+		getThisCourse: function () {
 			return { CourseID: 1 };
 		},
 		getTeachers: function () {
@@ -26,7 +26,7 @@ describe('CourseController', function () {
 	};
 
 	var mockCourseResourceError = {
-		getCurrentCourse: function () {
+		getThisCourse: function () {
 			return { CourseID: 1 };
 		},
 		getTeachers: function () {
@@ -78,9 +78,9 @@ describe('CourseController', function () {
 
 		spyOn(mockLoginResource, 'getRole').and.callThrough();
 		spyOn(mockLoginResourceNoToken, 'getRole').and.callThrough();
-		spyOn(mockCourseResource, 'getCurrentCourse').and.callThrough();
+		spyOn(mockCourseResource, 'getThisCourse').and.callThrough();
 		spyOn(mockCourseResource, 'getTeachers').and.callThrough();
-		spyOn(mockCourseResourceError, 'getCurrentCourse').and.callThrough();
+		spyOn(mockCourseResourceError, 'getThisCourse').and.callThrough();
 		spyOn(mockCourseResourceError, 'getTeachers').and.callThrough();
 		spyOn(mockLocation, 'path');
 		spyOn(toastr, 'error');
@@ -108,7 +108,7 @@ describe('CourseController', function () {
 			});
 
 			it('should get current course from CourseResource', function () {
-				expect(mockCourseResource.getCurrentCourse).toHaveBeenCalled();
+				expect(mockCourseResource.getThisCourse).toHaveBeenCalled();
 			});
 
 			it('should get teachers from CourseResource and assign scope.teachers as response', function () {

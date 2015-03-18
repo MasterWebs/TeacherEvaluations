@@ -104,7 +104,8 @@ describe('StudentController', function () {
 
 	var mockCourseResource = {
 		init: function (token, course) { },
-		setEvaluation: function (evalu) { }
+		setEvaluation: function (evalu) { },
+		setThisCourse: function (course) { }
 	};
 
 	beforeEach(function () {
