@@ -1,4 +1,4 @@
-angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
+angular.module('EvalApp', ['ngRoute', 'chart.js']).config(['$routeProvider',
 	function ($routeProvider) {
 		$routeProvider
 			.when('/login', {
