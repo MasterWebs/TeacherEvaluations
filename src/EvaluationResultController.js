@@ -84,8 +84,4 @@ function ($scope, $location, LoginResource, EvaluationResource, $timeout) {
 	$scope.updateType = function () {
 		$scope.updateCourse($scope.course);
 	};
-
-	$scope.onClick = function (points, evt) {
-    	console.log(points, evt);
-  	};
 }]);
