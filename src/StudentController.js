@@ -30,9 +30,8 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 			toastr.error('Could not fetch your evaluations');
 		});
 
-		//þarf að skoða þennan betur
 		$scope.route = function (course) {
-
+			CourseResource.setThisCourse(course);
 			$location.path('/course/' + course.ID);
 		};
 

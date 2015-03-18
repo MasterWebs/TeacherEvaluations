@@ -11,7 +11,7 @@ describe('CourseController', function () {
 
 	var mockCourseResource = {
 		getCurrentCourse: function () {
-			return { CourseID: 1 }
+			return { CourseID: 1 };
 		},
 		getTeachers: function () {
 			return {
@@ -19,7 +19,7 @@ describe('CourseController', function () {
 					fn([]);
 					return {
 						error: function (errorFn) { }
-					}
+					};
 				}
 			};
 		}
@@ -27,7 +27,7 @@ describe('CourseController', function () {
 
 	var mockCourseResourceError = {
 		getCurrentCourse: function () {
-			return { CourseID: 1 }
+			return { CourseID: 1 };
 		},
 		getTeachers: function () {
 			return {
@@ -36,7 +36,7 @@ describe('CourseController', function () {
 						error: function (errorFn) {
 							errorFn();
 						}
-					}
+					};
 				}
 			};
 		}

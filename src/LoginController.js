@@ -5,11 +5,8 @@ function ($scope, LoginResource, $location) {
 	$scope.pass = '';
 
 	$scope.login = function () {
-		// TODO:
-		// login user with REST service
 		LoginResource.login($scope.user, $scope.pass)
 		.success(function (response) {
-			// console.log(JSON.stringify(response));
 			LoginResource.setUser(response.User.Username);
 			LoginResource.setToken(response.Token);
 			LoginResource.setRole(response.User.Role);

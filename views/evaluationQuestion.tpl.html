@@ -1,19 +1,32 @@
-<div>
-	{{question.question.Text}}
-</div>
-
-<div ng-show="question.question.Type === 'text'">
-	<textarea ng-model="question.answer"></textarea>
-</div>
-
-<div ng-show="question.question.Type === 'single'">
-	<div ng-repeat="answer in question.question.Answers">
-		<input ng-model="question.answer" type="radio" ng-value="answer.ID"/>{{answer.Text}} {{answer.ID}}
+<div class="well well-sm">
+	<div>
+		<p class="question">{{question.question.Text}}<p>
 	</div>
-</div>
 
-<div ng-show="question.question.Type === 'multiple'">
-	<div ng-repeat="answer in question.question.Answers">
-		<input type="checkbox" ng-model="question.answer.answer.ID" /> {{answer.Text}}
+	<div ng-show="question.question.Type === 'text'"  >
+		<textarea ng-model="question.answer"></textarea>
+	</div>
+
+	<div ng-show="question.question.Type === 'single'">
+		<div ng-repeat="answer in question.question.Answers">
+			<div class="radio">
+				<label>
+					<input ng-model="question.answer" type="radio" ng-value="answer.ID"/>
+					{{answer.Text}} {{answer.ID}}
+				</label>
+			</div>
+			
+		</div>
+	</div>
+
+	<div ng-show="question.question.Type === 'multiple'">
+		<div ng-repeat="answer in question.question.Answers">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" ng-model="question.answer.answer.ID" /> 
+					{{answer.Text}}
+				</label>
+			</div>
+		</div>
 	</div>
 </div>
