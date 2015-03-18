@@ -30,8 +30,8 @@ angular.module('EvalApp', ['ngRoute']).config(['$routeProvider',
 				controller: 'CreateEvaluation'
 			})
 			.when('/evaluation/:id', {
-				templateUrl: 'views/evaluation.html',
-				controller: 'EvaluationController'
+				templateUrl: 'views/evaluationResult.html',
+				controller: 'EvaluationResultController'
 			})
 			.when('/student-evaluation/:id', {
 				templateUrl: 'views/studentEvaluation.html',

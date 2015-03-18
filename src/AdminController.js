@@ -56,5 +56,10 @@ function ($scope, $location, LoginResource, EvaluationTemplateResource, Evaluati
 			EvaluationResource.setEvaluation(evaluation);
 			$location.path('evaluation/' + evaluation.ID);
 		};
+
+		$scope.evalResult = function (evaluation) {
+			EvaluationResource.setEvaluation(evaluation);
+			$location.path('evaluation/' + evaluation.ID);
+		};
 	}
 }]);

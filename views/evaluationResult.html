@@ -1,0 +1,20 @@
+<div class="col-md-8">
+	<h3>{{thisEvaluation.TemplateTitle}} {{thisEvaluation.StartDate}} - {{thisEvaluation.EndDate}} {{thisEvaluation.Status}}</h3>
+
+</div>
+
+<div class="col-md-8">
+		<div ng-repeat="course in courses">
+			{{course.CourseName}} - {{course.CourseNameEN}} - {{course.Semester}}
+
+		</div>
+
+		<div ng-repeat="q in questions">
+			{{q.Text}} - {{q.TextEN}} - {{q.Type}} - {{q.TextResults}}
+		</div>
+
+		<div ng-repeat="opt in optionResults">
+			{{opt.Answer}} - {{opt.AnswerText}} - {{opt.Count}}
+		</div>
+	
+</div>
