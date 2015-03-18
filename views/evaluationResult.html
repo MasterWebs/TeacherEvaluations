@@ -1,20 +1,30 @@
-<div class="col-md-8">
+<div>
 	<h3>{{thisEvaluation.TemplateTitle}} {{thisEvaluation.StartDate}} - {{thisEvaluation.EndDate}} {{thisEvaluation.Status}}</h3>
 
 </div>
 
+<div class="col-md-4">
+	<h4>See evaluation result for</h4>
+	<span>Course</span>
+	<select class="form-control" ng-model="course" ng-options="course.Name for course in courseOption" 
+		ng-change="updateCourse(course)"></select>
+	<span>Question type</span><select class="form-control" ng-model="qType" ng-options="option.opt for option in qTypeOption"></select>
+	<span>Question</span><select class="form-control" ng-model="question" ng-options="question.Text for question in questionOption"></select>
+	<ul>
+		<li ng-repeat="course in courses"><a ng-click="getResult(course)"> {{course.Name}} - {{course.NameEN}} - {{course.Semester}}</a></li>
+		<li ng-if="courses.length === 0">None</li>
+	</ul>
+</div>
+
+<div class="col-md-6">
+	<p>Chart</p>
+	<canvas id="doughnut" class="chart chart-doughnut" data="data" labels="labels"></canvas> 
+
+	<ul>
+		<li ng-repeat="q in questions"><a ng-click="getQuestion(q)">{{q.Text}} - {{q.TextEN}} - {{q.Type}}</a></li>
+	</ul>
+</div>
+
 <div class="col-md-8">
-		<div ng-repeat="course in courses">
-			{{course.CourseName}} - {{course.CourseNameEN}} - {{course.Semester}}
-
-		</div>
-
-		<div ng-repeat="q in questions">
-			{{q.Text}} - {{q.TextEN}} - {{q.Type}} - {{q.TextResults}}
-		</div>
-
-		<div ng-repeat="opt in optionResults">
-			{{opt.Answer}} - {{opt.AnswerText}} - {{opt.Count}}
-		</div>
-	
+		
 </div>
