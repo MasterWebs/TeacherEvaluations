@@ -8,17 +8,19 @@
 				Dates are on format Year-Month-Date
 				Ex: 2015-02-16
 			</p>
-			<div><span>Start Date: </span><input type="date" class="form-group" ng-model="startDate.value" placeholder="DD-MM-YYYY"></div>
-			<div><span>End Date: </span><input type="date" class="form-group" ng-model="endDate.value" placeholder="DD-MM-YYYY"></div>
+			<div><span class="bold">Start Date: </span><input type="date" class="form-group" ng-model="startDate.value" placeholder="DD-MM-YYYY"></div>
+			<div><span class="bold">End Date: </span><input type="date" class="form-group" ng-model="endDate.value" placeholder="DD-MM-YYYY"></div>
 			<div><button class="btn btn-default" ng-click="createEvaluation()">Create Evaluation</button></div>
 		</div>
 
-		<h2>{{template.Title}} - {{template.TitleEN}}</h2>
-		<p>{{template.IntroText}}</p>
-		<p>{{template.IntroTextEN}}</p>
+		
 	</div>
 </div>
-
+<div>
+	<h2>{{template.Title}} - {{template.TitleEN}}</h2>
+	<p>{{template.IntroText}}</p>
+	<p>{{template.IntroTextEN}}</p>
+</div>
 <div class="row" ng-model="template">
 	<div  class="col-md-6" ng-if="cQuestions.length !== 0">
 		<h3>Course Questions</h3>
