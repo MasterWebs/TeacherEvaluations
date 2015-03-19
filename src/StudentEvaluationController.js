@@ -29,8 +29,6 @@ function ($scope, $location, LoginResource, CourseResource) {
 				// multiple answer questions can't be answered
 			}, $scope.courseQuestions);
 
-			console.log($scope.courseQuestions);
-
 			angular.forEach(response.TeacherQuestions, function (obj) {
 				var q = { question: obj, answer: '' };
 				if (obj.Type === 'text') {
@@ -66,9 +64,6 @@ function ($scope, $location, LoginResource, CourseResource) {
 				this.push(ans);
 			}
 		}, $scope.results);
-
-		// TODO: Post results to server
-		console.log($scope.results);
 
 		CourseResource.saveAnswers($scope.courseEvaluation.CourseID, '1', $scope.courseEvaluation.ID, $scope.results)
 		.success(function () {
