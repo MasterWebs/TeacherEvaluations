@@ -1,13 +1,14 @@
 <div class="col-md-4">
 	<h3>Your courses</h3>
-	<ul>
-		<li ng-repeat="course in myCourses"> <a ng-click="route(course)">{{course.Name}} - {{course.NameEN}}</a></li>
-	</ul>
+		<div ng-repeat="course in myCourses" ng-click="route(course)" class="well well-sm hand">
+		 	<p class="eval">{{course.Name}} - {{course.NameEN}}</p>
+		</div>
 </div>
 
 <div class="col-md-4">
 	<h3>Your evaluations</h3>
-	<ul ng-repeat="eval in myEvaluations">
-		<li><a ng-click="evaluation(eval)">{{eval.TemplateName}} - {{eval.CourseName}}</a></li>
-	</ul>
+	<div ng-repeat="eval in myEvaluations" ng-click="evaluation(eval)" class="well well-sm hand">
+		<p class="eval">{{eval.CourseName}} - {{eval.CourseNameEN}}</p>
+		<p>{{eval.Semester}}</p>
+	</div>
 </div>

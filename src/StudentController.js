@@ -6,6 +6,7 @@ function ($scope, $location, LoginResource, MyResource, CourseResource ) {
 	$scope.user = LoginResource.getUser();
 	$scope.myCourses = [];
 	$scope.myEvaluations = [];
+
 	if($scope.role !== 'student') {
 		toastr.error('You are not a student');
 		$location.path('/login');

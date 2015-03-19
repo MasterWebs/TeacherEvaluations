@@ -8,56 +8,58 @@
 				Dates are on format Year-Month-Date
 				Ex: 2015-02-16
 			</p>
-			<div><span>Start Date: </span><input type="date" class="form-group" ng-model="startDate.value" placeholder="DD-MM-YYYY"></div>
-			<div><span>End Date: </span><input type="date" class="form-group" ng-model="endDate.value" placeholder="DD-MM-YYYY"></div>
+			<div><span class="bold">Start Date: </span><input type="date" class="form-group" ng-model="startDate.value" placeholder="DD-MM-YYYY"></div>
+			<div><span class="bold">End Date: </span><input type="date" class="form-group" ng-model="endDate.value" placeholder="DD-MM-YYYY"></div>
 			<div><button class="btn btn-default" ng-click="createEvaluation()">Create Evaluation</button></div>
 		</div>
 
-		<h2>{{template.Title}} - {{template.TitleEN}}</h2>
-		<p>{{template.IntroText}}</p>
-		<p>{{template.IntroTextEN}}</p>
+		
 	</div>
 </div>
-
+<div>
+	<h2>{{template.Title}} - {{template.TitleEN}}</h2>
+	<p>{{template.IntroText}}</p>
+	<p>{{template.IntroTextEN}}</p>
+</div>
 <div class="row" ng-model="template">
-	<div  class="col-md-6">
+	<div  class="col-md-6" ng-if="cQuestions.length !== 0">
 		<h3>Course Questions</h3>
 		<div ng-repeat="cq in cQuestions">
 			<div class="well well-sm">
-				<p>Text: {{cq.Text}}</p>
-				<p>TextEN: {{cq.TextEN}}</p>
-				<p>Type: {{cq.Type}}</p>
+				<p><span class="bold">Text: </span> {{cq.Text}}</p>
+				<p><span class="bold">TextEN: </span> {{cq.TextEN}}</p>
+				<p><span class="bold">Type: </span>{{cq.Type}}</p>
 				
 				<div ng-show="cq.Type === 'single' || cq.Type === 'multiple'">
-					<p>Answers to question</p>
+					<p class="bold">Answer options</p>
 					<div ng-repeat="ans in cq.Answers">
 						<hr>
-						<p>Text: {{ans.Text}}</p>
-						<p>TextEN: {{ans.TextEN}}</p>
-						<p>ImageURL: {{ans.ImageURL}}</p>
-						<p>Weight: {{ans.Weight}}</p>
+						<p><span class="bold">Text: </span>{{ans.Text}}</p>
+						<p><span class="bold">TextEN: </span>{{ans.TextEN}}</p>
+						<p><span class="bold">ImageURL: </span> {{ans.ImageURL}}</p>
+						<p><span class="bold">Weight: </span> {{ans.Weight}}</p>
 					</div>
 				</div> <!-- repeat ans in cq -->
 			</div> <!-- well well sm -->
 		</div> <!-- ng repeat cQuestions -->
 	</div> <!-- col-md-6 -->
 
-	<div class="col-md-6">
+	<div class="col-md-6" ng-if="tQuestions.length !== 0">
 		<h3>Teacher Questions</h3>
 		<div ng-repeat="tq in tQuestions">
 			<div class="well well-sm">
-				<p>Text: {{tq.Text}}</p>
-				<p>TextEN: {{tq.TextEN}}</p>
-				<p>Type: {{tq.Type}}</p>
+				<p><span class="bold">Text: </span>{{tq.Text}}</p>
+				<p><span class="bold">TextEN: </span>{{tq.TextEN}}</p>
+				<p><span class="bold">Type: </span>{{tq.Type}}</p>
 
 				<div ng-show="tq.Type === 'single' || tq.Type === 'multiple'">
-					<p>Answers to question</p>
+					<p class="bold">Answers to questions</p>
 					<div ng-repeat="ans in tq.Answers">
 						<hr>
-						<p>Text: {{ans.Text}}</p>
-						<p>TextEN: {{ans.TextEN}}</p>
-						<p>ImageURL: {{ans.ImageURL}}</p>
-						<p>Weight: {{ans.Weight}}</p>
+						<p><span class="bold">Text: </span>{{ans.Text}}</p>
+						<p><span class="bold">TextEN: </span>{{ans.TextEN}}</p>
+						<p><span class="bold">ImageURL: </span>{{ans.ImageURL}}</p>
+						<p><span class="bold">Weight: </span>{{ans.Weight}}</p>
 					</div>
 				</div> <!-- repeat ans in tq -->
 				

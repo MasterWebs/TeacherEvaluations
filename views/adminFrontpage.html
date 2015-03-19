@@ -1,12 +1,7 @@
 <div class="row">	
 	<div class="col-md-4">
-		<h3>Operations</h3>
-		<ul>
-			<li><a ng-click="createTemplate()">Create evaluation template</a></li>
-			<!-- <li><a ng-click="redirect('getOne')">Get specific evaluation template</a></li>-->
-		</ul>
+		<a ng-click="createTemplate()" class="eval">Create evaluation template</a></li>
 
-		<h3>Evaluations</h3>
 		<h4>New Evaluations</h4>
 		<ul>
 			<li ng-repeat="eval in newEvaluations" ng-click="evalResult(eval)"><a>{{eval.TemplateTitle}} - {{eval.Status}}</a></li>
@@ -31,10 +26,10 @@
 
 		<div ng-repeat="template in evaluationTemplates">
 			<!-- <li ng-click="getTemplate(template)"> <a>{{template.Title}} - {{template.TitleEN}}</a> </li> -->
-			<div class="col-md-4">
-				<div class="well well-sm" ng-click="getTemplate(template)">
-					<h4>{{template.Title}}<h4>
-					<h4>{{template.TitleEN}}</h4>
+			<div class="hand">
+				<div class="well well-sm" ng-click="getTemplate(template)" class="hand">
+					<p class="eval">{{template.Title}}<p>
+					<p class="eval">{{template.TitleEN}}</p>
 				</div>
 			</div>
 		</div>
